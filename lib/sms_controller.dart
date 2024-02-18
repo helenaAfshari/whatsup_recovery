@@ -29,43 +29,4 @@ void requestForPermisionnnn()async{
       notificationListt.add(event);
     });
   }
-
-
-//   void startListening() async {
-//     print("start listening");
-//     var hasPermission = await NotificationsListener.hasPermission;
-//     if (hasPermission!) {
-//         print("no permission, so open settings");
-//         NotificationsListener.openPermissionSettings();
-//         return;
-//     }
-
-//     var isR = await NotificationsListener.isRunning;
-
-//     if (isR!) {
-//         await NotificationsListener.startService();
-//     }
-
-//     // setState(() => started = true);
-// }
-
-// void requestForPermision() async{
-//   final bool statuse = await 
-//   print("registration for permision");
-//   var hasPermision = await NotificationsListener.hasPermission;
-//   if(hasPermision!){
-//     print("No Permission");
-//     NotificationsListener.openPermissionSettings();
-//    return ;
-//   }
-//   listenNotification();
-
-// }
-
-// void listenNotification()async{
-//   print("Listening Notification");
-//    NotificationsListener.initialize();
-//    NotificationsListener.receivePort?.listen((e)=>print(e) );
-// }
-
 }

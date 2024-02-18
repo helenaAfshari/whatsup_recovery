@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notif/core/resource/constants/theme/my_theme.dart';
 import 'package:notif/home_page.dart';
+import 'package:notif/pressentation/screens/home_page_screen.dart';
+import 'package:notif/pressentation/screens/intro/intro_screen.dart';
 
 void main() {
   runApp( MyApp());
@@ -8,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:  HomePage(),
+      theme: MyTHeme.lightTheme(),
+      home:  IntroScreen(),
     );
   }
 }
