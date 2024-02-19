@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:notif/sms_controller.dart';
 import 'package:intl/intl.dart';
 class HomePageScreen extends StatelessWidget {

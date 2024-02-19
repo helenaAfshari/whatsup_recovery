@@ -1,21 +1,66 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notif/core/components/customwidgets/custom_button.dart';
 import 'package:notif/core/resource/constants/theme/my_theme.dart';
 import 'package:notif/home_page.dart';
+import 'package:notif/pressentation/blocs/intro/intro_bloc.dart';
+import 'package:notif/pressentation/blocs/intro/intro_event.dart';
+import 'package:notif/pressentation/blocs/intro/intro_state.dart';
 import 'package:notif/pressentation/screens/home_page_screen.dart';
 import 'package:notif/pressentation/screens/intro/intro_screen.dart';
+import 'package:notif/route/routes.dart';
+import 'package:notification_listener_service/notification_listener_service.dart';
 
 void main() {
   runApp( MyApp());
+
 }
 class MyApp extends StatelessWidget {
+  Completer<bool> completer = Completer<bool>();
+  // Completer<bool> completer = Completer<bool>();
+
+void checkPermission() async {
+  bool isPermissionGranted = await NotificationListenerService.isPermissionGranted();
+  completer.complete(isPermissionGranted);
+}
+
+void fetchData() async {
+  bool result = await false;
+  completer.complete(result);
+}
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: MyTHeme.lightTheme(),
-      home:  IntroScreen(),
-    );
+    return 
+      MaterialApp(
+        theme: MyTHeme.lightTheme(),
+        home: HomePage(),
+        // home:  SamplePageView(),
+        // initialRoute: ScreenNames.homeScreen,
+        // routes: routes,
+      );
+    
   }
 }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocProvider(
+//       create: (context) => IntroCubit(),
+//       child: MaterialApp(
+//        // routes: routes,
+//         theme: MyTHeme.lightTheme(),
+//          home:  IntroScreen(),
+//         // home: BlocBuilder<IntroCubit,IntroState>(
+//         // builder: (context, state) {
+//         //   if(state is )
+//         // },),
+//       ),
+//     );
+//   }
+// }
 // import 'dart:async';
 // import 'dart:developer';
 
