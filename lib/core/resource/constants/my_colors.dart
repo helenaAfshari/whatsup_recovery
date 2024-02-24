@@ -11,7 +11,7 @@ abstract class MyColors{
   static const Color borderBottomColor = Color(0xFF514D4D);
   static const Color dividerColor = Color(0xFF979797);
   static const Color musicBoxColor = Color(0xFFD7CEBD);
-  static const Color backgroundpercentMusicColor = Color(0xFFFFFFFF);
+  static const Color backgroundDrawerColor = Color(0xFFFFFFFF);
   static const Color percentMusicColor = Color(0xFFFFDEA4);
   static const Color tafsirTextColor = Colors.blue;
   static const Color circularProgressIndicatorColor = Colors.blue;

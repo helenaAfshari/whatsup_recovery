@@ -8,6 +8,7 @@ import 'package:notif/home_page.dart';
 import 'package:notif/pressentation/blocs/intro/intro_bloc.dart';
 import 'package:notif/pressentation/blocs/intro/intro_event.dart';
 import 'package:notif/pressentation/blocs/intro/intro_state.dart';
+import 'package:notif/pressentation/screens/home/home_screen.dart';
 import 'package:notif/pressentation/screens/home_page_screen.dart';
 import 'package:notif/pressentation/screens/intro/intro_screen.dart';
 import 'package:notif/route/routes.dart';
