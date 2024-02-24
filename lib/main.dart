@@ -17,50 +17,49 @@ void main() {
   runApp( MyApp());
 
 }
+// class MyApp extends StatelessWidget {
+//   Completer<bool> completer = Completer<bool>();
+//   // Completer<bool> completer = Completer<bool>();
+
+// void checkPermission() async {
+//   bool isPermissionGranted = await NotificationListenerService.isPermissionGranted();
+//   completer.complete(isPermissionGranted);
+// }
+
+// void fetchData() async {
+//   bool result = await false;
+//   completer.complete(result);
+// }
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//       MaterialApp(
+//         theme: MyTHeme.lightTheme(),
+//         home: HomePage(),
+//         // home:  SamplePageView(),
+//         // initialRoute: ScreenNames.homeScreen,
+//         // routes: routes,
+//       );
+    
+//   }
+// }
+
 class MyApp extends StatelessWidget {
-  Completer<bool> completer = Completer<bool>();
-  // Completer<bool> completer = Completer<bool>();
-
-void checkPermission() async {
-  bool isPermissionGranted = await NotificationListenerService.isPermissionGranted();
-  completer.complete(isPermissionGranted);
-}
-
-void fetchData() async {
-  bool result = await false;
-  completer.complete(result);
-}
+    Completer<bool> completer = Completer<bool>();
+  
+//     void checkPermission() async {
+//   bool isPermissionGranted = await NotificationListenerService.isPermissionGranted();
+//   completer.complete(isPermissionGranted);
+// }
   @override
   Widget build(BuildContext context) {
     return 
-      MaterialApp(
-        theme: MyTHeme.lightTheme(),
-        home: HomePage(),
-        // home:  SamplePageView(),
-        // initialRoute: ScreenNames.homeScreen,
-        // routes: routes,
-      );
-    
+    MaterialApp(
+      theme: MyTHeme.lightTheme(),
+      home: const IntroScreen(),
+    );
   }
 }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => IntroCubit(),
-//       child: MaterialApp(
-//        // routes: routes,
-//         theme: MyTHeme.lightTheme(),
-//          home:  IntroScreen(),
-//         // home: BlocBuilder<IntroCubit,IntroState>(
-//         // builder: (context, state) {
-//         //   if(state is )
-//         // },),
-//       ),
-//     );
-//   }
-// }
 // import 'dart:async';
 // import 'dart:developer';
 

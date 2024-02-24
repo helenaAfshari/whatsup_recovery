@@ -16,8 +16,8 @@ void requestForPermisionnnn()async{
   final bool status = await NotificationListenerService.isPermissionGranted();
   if(status != true){
     print("No Permision");
-    final bool statuss = 
-    await  NotificationListenerService.requestPermission();
+    // final bool statuss = 
+    // await  NotificationListenerService.requestPermission();
     return;
   }
   listenerNotificationn();
@@ -30,3 +30,5 @@ void requestForPermisionnnn()async{
     });
   }
 }
+
+

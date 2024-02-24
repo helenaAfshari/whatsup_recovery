@@ -1,6 +1,9 @@
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notif/pressentation/blocs/intro/intro_event.dart';
 import 'package:notif/pressentation/blocs/intro/intro_state.dart';
+import 'package:notif/pressentation/screens/home_page_screen.dart';
 import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 // class IntroCubit extends Cubit<IntroState>{
@@ -44,6 +47,8 @@ import 'package:notification_listener_service/notification_listener_service.dart
 
 class IntroBloc extends Bloc<IntroEvent, IntroState> {
     bool permissionRequested = false;
+    List notificationListt = <ServiceNotificationEvent>[];
+
 
  // List<GhazalItemModelEntity> ghazaliatHafez = [];
   IntroBloc() : super(InisializeIntroState()) {
@@ -90,8 +95,48 @@ class IntroBloc extends Bloc<IntroEvent, IntroState> {
       //   }
       // }
     }
-    });
+    ///1111111111111111111111111111111111111111111111111111
+    else if(event is AddPermisionEvent){
+      print("object");
+     emit (LoadingIntroState());
+    //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
+//     NotificationListenerService.requestPermission().then((isPermissionGranted) {
+//     if (isPermissionGranted) {
+//   Navigator.pushReplacement(event.context, MaterialPageRoute(builder: (context) => HomePageScreen()));
+
+// }
+
+//     });
+  
+// //   //      NotificationListenerService.requestPermission().then((isPermissionGranted) {
+// //   //   // emit(LoadedIntroState(isPermissionGranted));
+// //   //    emit(LoadedIntroState());
+  
+// //   // });
+  
+// //     }
+// //     else if(event is AddPermisionEvent){
+// //   print("object");
+// //   NotificationListenerService.requestPermission().then((isPermissionGranted) {
+// //     if (isPermissionGranted) {
+// //       Navigator.pushReplacement(event.context, MaterialPageRoute(builder: (context) => HomePageScreen()));
+// //     }
+// //   });
+  }
+
+    ///111111111111111111111111111111111111111111111111111111111111
+    });
+    
+  // void listenerNotificationn(){
+  //     List notificationListt = <ServiceNotificationEvent>[];
+
+  //   print("Listening Sms");
+  //   NotificationListenerService.notificationsStream.listen((event) {
+  //     print("Curent notification: $event");
+  //     notificationListt.add(event);
+  //   });
+  // }
   
     // on<EstekhareEvent>((event, emit) async {
     //   print(event);

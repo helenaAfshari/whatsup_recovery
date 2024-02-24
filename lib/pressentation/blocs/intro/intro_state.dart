@@ -12,8 +12,6 @@ class InisializeIntroState extends IntroState{
 class LoadedIntroState extends IntroState{
   //LoadedIntroState(this.f);
   Future<bool> f = NotificationListenerService.isPermissionGranted();
-
-
 }
 class ErrorIntroState extends IntroState{
   

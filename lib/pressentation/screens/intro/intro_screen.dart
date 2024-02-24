@@ -10,6 +10,9 @@ import 'package:notif/core/resource/constants/theme/my_theme.dart';
 import 'package:notif/pressentation/blocs/intro/intro_bloc.dart';
 import 'package:notif/pressentation/blocs/intro/intro_event.dart';
 import 'package:notif/pressentation/blocs/intro/intro_state.dart';
+import 'package:notif/pressentation/screens/home/home_screen.dart';
+import 'package:notif/pressentation/screens/home_page_screen.dart';
+import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -29,37 +32,52 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
- 
+bool permissionShown = false;
 
-  return
-Scaffold(
-  body:
-  BlocBuilder<IntroBloc,IntroState>(
-    builder: (context, state) {
-   if(state is LoadingIntroState){
-    return Center(child: CircularProgressIndicator(),);
-   }
-    if(state is LoadedIntroState){
-      return 
-      Center(
-    child: GestureDetector(
-      onTap: () {
-       
-        BlocProvider.of<IntroBloc>(context).add(IntroLoadedEvent(state.f));
-         NotificationListenerService.isPermissionGranted();
-        print("jjjkkk");
-      },
-      child: Container(
-      height: 50,
-      width: 50,
-      color: Colors.amber,
-      
+ return BlocProvider<IntroBloc>(
+    create: (context) => IntroBloc()..add(IntroLoadedEvent()), // BlocProvider اینجا قرار می‌گیرد
+    child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 2, 56, 30),
+      body: BlocBuilder<IntroBloc, IntroState>(
+        builder: (context, state) {
+          if (state is LoadingIntroState) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (state is LoadedIntroState) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                   Gap(50),
+          Image.asset('assets/images/smartphone.png'),
+           SizedBox(height: 20),
+                  // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
+                  Text(MyStrings.hello),
+                   SizedBox(height: 20),
+                  // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
+                  Text(MyStrings.whatsUpRecovery),
+             ElevatedButton(
+  onPressed: () {
+
+    // ارسال درخواست permission از طریق Bloc
+    BlocProvider.of<IntroBloc>(context).add(AddPermisionEvent(state.f,));
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
+   
+  },
+  child: Text('Enable'),
+),
+
+                 
+                ],
+              ),
+            );
+          }
+          return Container();
+        },
       ),
-    ));
-    }
-    return Container();
-  },)
-);
+    ),
+  );
 
 //     return
 //        Scaffold(
@@ -148,6 +166,8 @@ Scaffold(
 //   },
 // )
 //         );
+
+
 
 
 
@@ -369,3 +389,16 @@ Scaffold(
 //     ));
   }
 }
+
+
+
+ void listenerNotificationn(){
+  List notificationListt = <ServiceNotificationEvent>[];
+
+    print("Listening Sms");
+    NotificationListenerService.notificationsStream.listen((event) {
+      print("Curent notification: $event");
+      notificationListt.add(event);
+    });
+  }
+
