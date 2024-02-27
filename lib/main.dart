@@ -2,18 +2,51 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:notif/core/components/customwidgets/custom_button.dart';
 import 'package:notif/core/resource/constants/theme/my_theme.dart';
 import 'package:notif/home_page.dart';
 import 'package:notif/pressentation/blocs/intro/intro_bloc.dart';
 import 'package:notif/pressentation/blocs/intro/intro_event.dart';
 import 'package:notif/pressentation/blocs/intro/intro_state.dart';
-import 'package:notif/pressentation/screens/home/home_screen.dart';
+import 'package:notif/pressentation/route/routes.dart';
+import 'package:notif/pressentation/route/screen_names.dart';
+import 'package:notif/pressentation/screens/notificationhistory/notification_hisory.dart';
 import 'package:notif/pressentation/screens/home_page_screen.dart';
 import 'package:notif/pressentation/screens/intro/intro_screen.dart';
-import 'package:notif/route/routes.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 
+
+// void main() async {
+//   await Hive.initFlutter();
+//   await Hive.openBox('notifications');
+
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Save to Hive'),
+//         ),
+//         body: Center(
+//           child: ElevatedButton(
+//             onPressed: () async {
+//               final notificationsBox = await Hive.openBox('notifications');
+//               String title = 'Notification Title';
+//               notificationsBox.add(title);
+//               print('Title added to Hive: $title');
+//             },
+//             child: Text('Save Title to Hive'),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 void main() {
   runApp( MyApp());
 
@@ -44,7 +77,7 @@ void main() {
     
 //   }
 // }
-
+///555555555555555555555555555555555555555555555
 class MyApp extends StatelessWidget {
     Completer<bool> completer = Completer<bool>();
   
@@ -57,10 +90,30 @@ class MyApp extends StatelessWidget {
     return 
     MaterialApp(
       theme: MyTHeme.lightTheme(),
-      home: const IntroScreen(),
+      initialRoute: ScreenNames.introRoot,
+      routes: routes,
+      //home: const IntroScreen(),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////55555555555555555555555555555555555555555555555
 // import 'dart:async';
 // import 'dart:developer';
 

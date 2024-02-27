@@ -10,7 +10,8 @@ import 'package:notif/core/resource/constants/theme/my_theme.dart';
 import 'package:notif/pressentation/blocs/intro/intro_bloc.dart';
 import 'package:notif/pressentation/blocs/intro/intro_event.dart';
 import 'package:notif/pressentation/blocs/intro/intro_state.dart';
-import 'package:notif/pressentation/screens/home/home_screen.dart';
+import 'package:notif/pressentation/route/screen_names.dart';
+import 'package:notif/pressentation/screens/notificationhistory/notification_hisory.dart';
 import 'package:notif/pressentation/screens/home_page_screen.dart';
 import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
@@ -50,18 +51,19 @@ bool permissionShown = false;
                 children: [
                    Gap(50),
           Image.asset('assets/images/smartphone.png'),
-           SizedBox(height: 20),
+           const SizedBox(height: 20),
                   // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
-                  Text(MyStrings.hello),
-                   SizedBox(height: 20),
+                  const Text(MyStrings.hello),
+                   const SizedBox(height: 20),
                   // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
-                  Text(MyStrings.whatsUpRecovery),
+                  const Text(MyStrings.whatsUpRecovery),
              ElevatedButton(
   onPressed: () {
 
     // ارسال درخواست permission از طریق Bloc
     BlocProvider.of<IntroBloc>(context).add(AddPermisionEvent(state.f,));
-       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+   //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NotificationHistory()));
+   Navigator.pushReplacementNamed(context, ScreenNames.notificationHistoryScreen);
 
    
   },
