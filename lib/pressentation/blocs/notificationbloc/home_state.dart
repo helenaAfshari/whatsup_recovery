@@ -1,4 +1,5 @@
 
+import 'package:intl/intl.dart';
 import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
 import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
@@ -34,6 +35,8 @@ class InisializeHomeState extends HomeState{
 //   }
 // }
 class LoadedHomeState extends HomeState{
+   LoadedHomeState(this.formattedDateTime);
+String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
   //  LoadedHomeState(this.notificationListt);
   //  //List notificationListt = <ServiceNotificationEvent>[];
 // List<RecoveryModel> notificationListt = [];

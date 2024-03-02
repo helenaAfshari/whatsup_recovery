@@ -12,6 +12,13 @@ import 'package:notif/pressentation/screens/notificationhistory/ggg.dart';
 import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 
+class NotifWithTime{
+  DateTime date;
+  ServiceNotificationEvent event;
+
+  NotifWithTime(this.date, this.event);
+}
+
 class NotificationHistory extends StatefulWidget {
   const NotificationHistory({super.key});
 
@@ -20,7 +27,7 @@ class NotificationHistory extends StatefulWidget {
 }
 
 class _NotificationHistoryState extends State<NotificationHistory> {
-     List notificationListt = <ServiceNotificationEvent>[];
+     List notificationListt = <NotifWithTime>[];
      int? k ;
      DateTime currentTime = DateTime.now();
 
@@ -33,7 +40,8 @@ String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
     NotificationListenerService.notificationsStream.listen((event) {
       print("Curent notification: $event");
       setState(() {
-        notificationListt.add(event);
+        notificationListt.add(NotifWithTime(DateTime.now(), event));
+     
       });
     });
   }
@@ -45,7 +53,7 @@ String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
     
 
     return BlocProvider(
-      create: (context) => HomeBloc()..add(HomeLoadedEvent()),
+      create: (context) => HomeBloc()..add(HomeLoadedEvent(formattedDateTime)),
       child: Scaffold(
           appBar: AppBar(
             title: Text("Notification history"),
@@ -85,9 +93,9 @@ String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
       child: ListView.builder(
         itemCount:notificationListt.length,
         itemBuilder: (BuildContext context, int index) {
-        //  final notification = notificationListt[index];
-          if (notificationListt[index].packageName!.startsWith("com.whatsapp")) {
-            if(notificationListt[index].content.toString().contains("new messages")==true){
+         final notification = notificationListt[index];
+          if (notification.event.packageName!.startsWith("com.whatsapp")) {
+            if(notification.event.content.toString().contains("new messages")==true){
     return Container();
             }else{
   return 
@@ -99,11 +107,11 @@ String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
 //   Navigator.pushNamed(
 //     context,
 //     ScreenNames.detailsNotificationHistoryListScreen,
-//     arguments: state.notificationListt[index].title,
+//     arguments: state.notification.event.title,
 //   );
 // }
 
-//                       print("hhjjkkkddhjgugk::::${state.notificationListt[index].title}");
+//                       print("hhjjkkkddhjgugk::::${state.notification.event.title}");
 //    print("HHHHHHHHHHHFSSS::::::$index");
 int adjustedIndex = index<0 ? index-1:index;
          // List<> k = state.notificationListt;
@@ -114,7 +122,7 @@ List<ServiceNotificationEvent> k = notificationListt.cast<ServiceNotificationEve
                               builder: (context) => BlocProvider(
                                 create: (context) => HomeBloc(),
                                 child: DetailsNotificationHistoryList(
-                              service:notificationListt[index],
+                              service:notification.event,
       indexx: index,
       
                                  
@@ -148,9 +156,9 @@ List<ServiceNotificationEvent> k = notificationListt.cast<ServiceNotificationEve
                       //  overflow: TextOverflow.clip,
                       //  maxLines: 3,),
                     Expanded(
-                        child: Text( notificationListt[index].content,
-                    // state.notificationListt[index].content,
-                    // state.notificationListt[index].title??"gggggg",
+                        child: Text( notification.event.content,
+                    // state.notification.event.content,
+                    // state.notification.event.title??"gggggg",
                         maxLines: 1, // تعداد خطوط مورد نظر (در اینجا یک خط)
                         overflow: TextOverflow.ellipsis, // نمایش سه نقطه در صورت اتمام متن
                       ),
@@ -159,9 +167,10 @@ List<ServiceNotificationEvent> k = notificationListt.cast<ServiceNotificationEve
                        
                        Row(
                         children: [
-                  Text(notificationListt[index].title),
+                  Text(notification.event.title),
                        // Gap(10),
-                       Text("$formattedDateTime"),
+                       Text(DateFormat('HH:mm:ss a').format(notification.date)),
+                       
                         ],
                        )
                       ],
@@ -181,6 +190,14 @@ List<ServiceNotificationEvent> k = notificationListt.cast<ServiceNotificationEve
                     //     // Text("lllll::::$formattedDateTime"),
                     //   ],
                     // ),
+                    ,
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
+                      return
+                      Container(height: 50,width: 10,color: Colors.amber,);
+                    },)
                   ],
                 ),
               ),

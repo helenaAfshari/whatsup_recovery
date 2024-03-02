@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
 import 'package:notif/pressentation/blocs/notificationbloc/home_event.dart';
 import 'package:notif/pressentation/blocs/notificationbloc/home_state.dart';
@@ -9,17 +10,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   // IntroBloc() : super(InisializeIntroState()) {
     int idext = 0;
     
+    
     HomeBloc():super(InisializeHomeState()){
   List<ServiceNotificationEvent> notificationListt = <ServiceNotificationEvent>[];
     List<RecoveryModel> recovery =[];
         String content = recovery.isNotEmpty ? recovery[0].content ?? "" : "";
+String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
 
 
        on<HomeEvent>((event, emit) async {
           if(event is HomeLoadedEvent){
                     print("hhh");
         emit (LoadingHomeState());
-
+        
       //    ServiceNotificationEvent(
       //   title: event.notificationListt[1].title,
       //   content: event.notificationListt[1].content,
@@ -28,7 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           //  emit(LoadedIntroState());
 
   print("LoadedHomeState");
-  emit(LoadedHomeState());
+  emit(LoadedHomeState(formattedDateTime));
   // NotificationListenerService.requestPermission().then((isPermissionGranted) {
   //   // emit(LoadedIntroState(isPermissionGranted));
   //    emit(LoadedIntroState());

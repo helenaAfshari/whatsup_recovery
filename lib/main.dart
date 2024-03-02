@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:notif/core/components/customwidgets/custom_button.dart';
 import 'package:notif/core/resource/constants/theme/my_theme.dart';
 import 'package:notif/home_page.dart';
@@ -47,6 +46,7 @@ import 'package:notification_listener_service/notification_listener_service.dart
 //     );
 //   }
 // }
+
 void main() {
   runApp( MyApp());
 

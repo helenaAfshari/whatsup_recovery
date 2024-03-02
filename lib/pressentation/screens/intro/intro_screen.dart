@@ -403,4 +403,3 @@ bool permissionShown = false;
       notificationListt.add(event);
     });
   }
-
