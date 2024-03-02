@@ -35,18 +35,6 @@ class InisializeHomeState extends HomeState{
 //   }
 // }
 class LoadedHomeState extends HomeState{
-   LoadedHomeState(this.formattedDateTime);
-String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
-  //  LoadedHomeState(this.notificationListt);
-  //  //List notificationListt = <ServiceNotificationEvent>[];
-// List<RecoveryModel> notificationListt = [];
-// LoadedHomeState(this.notificationListt);
-// ServiceNotificationEvent notificationListt = ServiceNotificationEvent();
-  // List notificationListt = <ServiceNotificationEvent>[];
-     //final notificationListt;
-
-  // LoadedHomeState({required this.mobile});
-  //   final mobile;
 }
 class ErrorHomeState extends HomeState{
   

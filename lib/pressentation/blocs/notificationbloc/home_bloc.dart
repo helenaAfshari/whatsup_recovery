@@ -12,30 +12,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     
     
     HomeBloc():super(InisializeHomeState()){
-  List<ServiceNotificationEvent> notificationListt = <ServiceNotificationEvent>[];
-    List<RecoveryModel> recovery =[];
-        String content = recovery.isNotEmpty ? recovery[0].content ?? "" : "";
-String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
-
 
        on<HomeEvent>((event, emit) async {
           if(event is HomeLoadedEvent){
                     print("hhh");
         emit (LoadingHomeState());
-        
-      //    ServiceNotificationEvent(
-      //   title: event.notificationListt[1].title,
-      //   content: event.notificationListt[1].content,
-      // );
-         
-          //  emit(LoadedIntroState());
 
   print("LoadedHomeState");
-  emit(LoadedHomeState(formattedDateTime));
-  // NotificationListenerService.requestPermission().then((isPermissionGranted) {
-  //   // emit(LoadedIntroState(isPermissionGranted));
-  //    emit(LoadedIntroState());
-  // });
+  emit(LoadedHomeState());
   return;
               
           }
@@ -50,26 +34,5 @@ String formattedDateTime = DateFormat('HH:mm:ss a').format(DateTime.now());
           
     });
 }
-
-  // void sendNotificationsToScreen(List<RecoveryModel> notifications) {
-  //   notifications.forEach((notification) {
-  //     ServiceNotificationEvent();
-  //       ServiceNotificationEvent(
-  //         title: notification.title,
-  //         content: notification.content,
-  //         // Here you can add other properties if needed
-        
-  //     );
-  //   });
-  // }
-//   void sendNotificationsToScreen(List<RecoveryModel> notifications) {
-//   for (var notification in notifications) {
-//     ServiceNotificationEvent(
-//       title: notification.title,
-//       content: notification.content,
-//       // Here you can add other properties if needed
-//     );
-//   }
-// }
 
 }

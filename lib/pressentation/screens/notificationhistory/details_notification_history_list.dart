@@ -19,9 +19,6 @@ final ServiceNotificationEvent? service;
 class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
   @override
   Widget build(BuildContext context) {
-    final indexx = widget.indexx;
-
-    // از indexx برای استفاده از آرگومان در اینجا استفاده کنید
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +30,7 @@ class _DetailsNotificationHistoryListState extends State<DetailsNotificationHist
       Container(
       ),
  Text('Content: ${widget.service?.content ?? ""}'),
-        Text('Index: ${widget.indexx ?? "No index available"}'),
+       // Text('Index: ${widget.indexx ?? "No index available"}'),
     ],
   ),
 ),
