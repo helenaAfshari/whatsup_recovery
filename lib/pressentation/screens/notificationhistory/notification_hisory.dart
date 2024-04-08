@@ -17,7 +17,7 @@ class NotificationHistory extends StatefulWidget {
 
 class _NotificationHistoryState extends State<NotificationHistory> {
      List notificationListt = <NotifWithTimeModel>[];
-
+String formattedDate = '';
 
   @override
   void initState() {
@@ -26,9 +26,11 @@ class _NotificationHistoryState extends State<NotificationHistory> {
       print("Curent notification: $event");
       setState(() {
         notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
-     
+          //formattedDate = formatDate(DateTime.now());
       });
+      
     });
+    //formattedDate = formatDate(DateTime.now());
   }
   @override
   Widget build(BuildContext context) {
@@ -37,17 +39,13 @@ class _NotificationHistoryState extends State<NotificationHistory> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("Notification history"),
-            backgroundColor: Colors.amber,
-          
+            backgroundColor: Colors.amber, 
       ),
       drawer: DrawerWidget(),
         body:
            BlocBuilder<HomeBloc,HomeState>(builder: (context, state) {
-       
             if(state is LoadedHomeState){
-
                   return 
-           
               Column(
   children: [
     Expanded(
@@ -55,26 +53,30 @@ class _NotificationHistoryState extends State<NotificationHistory> {
         itemCount:notificationListt.length,
         itemBuilder: (BuildContext context, int index) {
          final notification = notificationListt[index];
-          if (notification.event.packageName!.startsWith("com.whatsapp")) {
-            if(notification.event.content.toString().contains("new messages")==true){
+          if (notification.servicenotif.packageName!.startsWith("com.whatsapp")) {
+            if(notification.servicenotif.content.toString().contains("new messages")==true){
     return Container();
             }else{
   return 
   GestureDetector(
     onTap: () {
       print("gggggkkkllll");
-    Navigator.of(context).push(MaterialPageRoute(  
-      
-                              builder: (context) => BlocProvider(
-                                create: (context) => HomeBloc(),
-                                child: DetailsNotificationHistoryList(
-                              service:notification.event,
+      Navigator.of(context).push(MaterialPageRoute(
+  builder: (context) => BlocProvider(
+    create: (context) => HomeBloc(),
+    child: DetailsNotificationHistoryList(
+      service: notification.servicenotif,
       indexx: index,
+      // formattedDatee: formattedDate,
+       formattedDatee: notification.date,
+      //notificationListt:notification.date,
       
-                                 
-                                ),
-                              ),
-                            ));
+     // time: DateFormat('HH:mm:ss a').format(notification.date),
+// اضافه کردن زمان
+    ),
+  ),
+));
+
 
    },
     child: Container(
@@ -98,7 +100,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                          ),
                      
                     Expanded(
-                        child: Text( notification.event.content,
+                        child: Text(notification.servicenotif.content,
                         maxLines: 1, // تعداد خطوط مورد نظر (در اینجا یک خط)
                         overflow: TextOverflow.ellipsis, // نمایش سه نقطه در صورت اتمام متن
                       ),
@@ -107,14 +109,15 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                        
                        Row(
                         children: [
-                  Text(notification.event.title),
-                       Text(DateFormat('HH:mm:ss a').format(notification.date)),
+                  Text(notification.servicenotif.title),
+      //              Center(
+      //   child: Text('Formatted Date: $formattedDate'),
+      //  ),
+                  Text(DateFormat('HH:mm:ss a').format(notification.date)),
                         ],
-                       )
+                       ),
                       ],
-                    )
-                    ,
-                  
+                    ),
                   ],
                 ),
               ),
@@ -136,4 +139,10 @@ class _NotificationHistoryState extends State<NotificationHistory> {
       ),
     );
   }
+
+    String formatDate(DateTime date) {
+    return DateFormat('HH:mm:ss a').format(date);
+  }
 }
+
+
