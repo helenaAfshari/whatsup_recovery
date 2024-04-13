@@ -1,4 +1,6 @@
 
+
+
 import 'package:flutter/material.dart';
 import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
 
@@ -112,6 +114,140 @@ class DetailsNotificationHistoryList extends StatelessWidget {
     );
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+// import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+// import 'package:notification_listener_service/notification_event.dart';
+
+// class DetailsNotificationHistoryList extends StatefulWidget {
+//        List? notificationListt = <NotifWithTimeModel>[];
+       
+//   final ServiceNotificationEvent? service;
+//   final int? indexx;
+//   //final DateTime time; // اضافه کردن پارامتر زمان
+
+//   String? time;
+//   final DateTime formattedDatee;
+//   DetailsNotificationHistoryList({this.indexx,this.service,this.notificationListt,required this.formattedDatee});
+
+//   @override
+//   State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
+// }
+
+// class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
+//        List notificationListt = <NotifWithTimeModel>[];
+//        List<messageModel> notificationListDetails = [];
+//   @override
+//   void initState() {
+//     super.initState();
+    
+//     // NotificationListenerService.notificationsStream.listen((event) {
+//     //   print("Curent notification: $event");
+//     //   setState(() {
+//     //     notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
+//     //       //formattedDate = formatDate(DateTime.now());
+//     //   });
+      
+//     // });
+//     //formattedDate = formatDate(DateTime.now());
+//   }
+//   @override
+//   Widget build(BuildContext context) {
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Details'),
+//       ),
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount:notificationListDetails.length,
+//               shrinkWrap: true,
+//               itemBuilder:(context, index) {
+//               return Padding(
+//                 padding: const EdgeInsets.all(8.0),
+//                 child: Container(
+//                   height: 50,
+//                  width: 20,
+//                   color: const Color.fromARGB(255, 181, 174, 155),
+//                    child: Text(notificationListDetails[index].detailsText),
+//                   //child: Text(notification.textUser),
+                  
+//                 ),
+//               );
+//             },
+//              ),
+//           ),
+
+//           Padding(
+//             padding: const EdgeInsets.only(left:160,top: 20),
+//             child: Container(
+//               decoration: BoxDecoration(
+//                     color: Color.fromARGB(255, 176, 227, 215),
+//                 borderRadius: BorderRadius.circular(10)),
+//               // width: 230,
+//             child: Column(
+//               children: [
+//                 Row(
+//                   children: [
+//                     Expanded(
+//                       child:
+//                   Text('${widget.service?.content ?? ""}'),
+//                     ),
+                   
+//                     // Padding(
+//                     //   padding: const EdgeInsets.only(top: 40),
+//                     //   child: Text("55"),
+//                     // ),
+//                   ],
+//                 ),
+//      Padding(
+//        padding: const EdgeInsets.only(left: 90),
+//        child: Text('${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
+//      ),
+
+//               ],
+//             ),
+//           ),
+//           ),
+
+// //           Container(
+// //             height: 70,
+// //             width: 200,
+// //             color: Colors.amber,
+// //            child: Row(
+// //             children: [
+// //             Expanded(
+// //   child: Text(
+// //     "datahhhhhhhهههههههههههغغغغغغغغiiiiii5555uuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+// //     overflow: TextOverflow.visible,
+// //     maxLines: 10,
+// //   ),
+// // ),
+
+// //               SizedBox(width: 10,),
+// //               Padding(
+// //                 padding: const EdgeInsets.only(top: 15),
+// //                 child: Text("55"),
+// //               ),
+// //             ],
+// //            ),
+// //           ),
+//  Text('Content: ${widget.service?.content ?? ""}'),
+//            // Text('Index: ${widget.indexx ?? "No index available"}'),
+//             Text("hhh"),
+//            // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
+//             // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
+//        Text('Formatted Date on Another Pagehhhhh: ${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
+
+//         ],
+//       ),
+
+//     );
+//   }
+// }
 
 
 

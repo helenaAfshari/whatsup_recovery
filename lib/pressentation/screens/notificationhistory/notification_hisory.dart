@@ -47,7 +47,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
           rooms.add(RoomModel(name: event.title ?? 'Unknown', date: DateTime.now(), lastMsg: msg, messages: [msg]));
         } else {
           //  new nessage from exist user
-          rooms[rIndex]..messages.add(msg)..lastMsg = msg..date = DateTime.now();
+          rooms[1]..messages.add(msg)..lastMsg = msg..date = DateTime.now();
         }
          rooms.sort((a, b) => b.date.compareTo(a.date));
        /*  notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
