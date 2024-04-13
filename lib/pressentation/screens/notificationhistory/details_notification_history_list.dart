@@ -1,120 +1,5 @@
 
-
-
-import 'package:flutter/material.dart';
-import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
-
-class DetailsNotificationHistoryList extends StatelessWidget {
-
-  final RoomModel? room;
-  const DetailsNotificationHistoryList({super.key,required this.room});
-
-  @override
-  Widget build(BuildContext context) {
-
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Details'),
-      ),
-      body: room == null ? Text('room required') :  ListView.builder(
-        itemCount: room!.messages.length,
-        itemBuilder: (context, index) {
-        final msg = room!.messages[index];
-        return ListTile(
-          title: Text(msg.servicenotif.content ?? 'Withot content'),
-        );
-      },),
-      /* body: Column(
-        children: [
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount:notificationListDetails.length,
-          //     shrinkWrap: true,
-          //     itemBuilder:(context, index) {
-          //     return Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: Container(
-          //         height: 50,
-          //        width: 20,
-          //         color: const Color.fromARGB(255, 181, 174, 155),
-          //          child: Text(notificationListDetails[index].detailsText),
-          //         //child: Text(notification.textUser),
-                  
-          //       ),
-          //     );
-          //   },
-          //    ),
-          // ),
-
-          Padding(
-            padding: const EdgeInsets.only(left:160,top: 20),
-            child: Container(
-              decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 176, 227, 215),
-                borderRadius: BorderRadius.circular(10)),
-              // width: 230,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child:
-                  Text('${widget.service?.content ?? ""}'),
-                    ),
-                   
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 40),
-                    //   child: Text("55"),
-                    // ),
-                  ],
-                ),
-     Padding(
-       padding: const EdgeInsets.only(left: 90),
-       child: Text('${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
-     ),
-
-              ],
-            ),
-          ),
-          ),
-
-//           Container(
-//             height: 70,
-//             width: 200,
-//             color: Colors.amber,
-//            child: Row(
-//             children: [
-//             Expanded(
-//   child: Text(
-//     "datahhhhhhhهههههههههههغغغغغغغغiiiiii5555uuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-//     overflow: TextOverflow.visible,
-//     maxLines: 10,
-//   ),
-// ),
-
-//               SizedBox(width: 10,),
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 15),
-//                 child: Text("55"),
-//               ),
-//             ],
-//            ),
-//           ),
- Text('Content: ${widget.service?.content ?? ""}'),
-           // Text('Index: ${widget.indexx ?? "No index available"}'),
-            Text("hhh"),
-           // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
-            // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
-       Text('Formatted Date on Another Pagehhhhh: ${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
-
-        ],
-      ),
- */
-    );
-  }
-}
-
+//قبل
 // import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 // import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
@@ -125,11 +10,14 @@ class DetailsNotificationHistoryList extends StatelessWidget {
        
 //   final ServiceNotificationEvent? service;
 //   final int? indexx;
+//   final RoomModel? room;
 //   //final DateTime time; // اضافه کردن پارامتر زمان
 
 //   String? time;
 //   final DateTime formattedDatee;
-//   DetailsNotificationHistoryList({this.indexx,this.service,this.notificationListt,required this.formattedDatee});
+//   DetailsNotificationHistoryList({
+//     this.room,
+//     this.indexx,this.service,this.notificationListt,required this.formattedDatee});
 
 //   @override
 //   State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
@@ -137,7 +25,7 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 
 // class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
 //        List notificationListt = <NotifWithTimeModel>[];
-//        List<messageModel> notificationListDetails = [];
+//       // List<messageModel> notificationListDetails = [];
 //   @override
 //   void initState() {
 //     super.initState();
@@ -161,26 +49,34 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //       ),
 //       body: Column(
 //         children: [
-//           Expanded(
-//             child: ListView.builder(
-//               itemCount:notificationListDetails.length,
-//               shrinkWrap: true,
-//               itemBuilder:(context, index) {
-//               return Padding(
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: Container(
-//                   height: 50,
-//                  width: 20,
-//                   color: const Color.fromARGB(255, 181, 174, 155),
-//                    child: Text(notificationListDetails[index].detailsText),
-//                   //child: Text(notification.textUser),
+//         //   ListView.builder(
+//         // itemCount: widget.room!.messages.length,
+//         // itemBuilder: (context, index) {
+//         // final msg = widget.room!.messages[index];
+//         // return ListTile(
+//         //   title: Text(msg.servicenotif.content ?? 'Withot content'),
+//         // );
+//         // }
+//         //   )
+//           // Expanded(
+//           //   child: ListView.builder(
+//           //     itemCount:notificationListDetails?.length,
+//           //     shrinkWrap: true,
+//           //     itemBuilder:(context, index) {
+//           //     return Padding(
+//           //       padding: const EdgeInsets.all(8.0),
+//           //       child: Container(
+//           //         height: 50,
+//           //        width: 20,
+//           //         color: const Color.fromARGB(255, 181, 174, 155),
+//           //          child: Text(notificationListDetails[index].detailsText),
+//           //         //child: Text(notification.textUser),
                   
-//                 ),
-//               );
-//             },
-//              ),
-//           ),
-
+//           //       ),
+//           //     );
+//           //   },
+//           //    ),
+//           // ),
 //           Padding(
 //             padding: const EdgeInsets.only(left:160,top: 20),
 //             child: Container(
@@ -195,6 +91,7 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //                     Expanded(
 //                       child:
 //                   Text('${widget.service?.content ?? ""}'),
+                  
 //                     ),
                    
 //                     // Padding(
@@ -213,35 +110,35 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //           ),
 //           ),
 
-// //           Container(
-// //             height: 70,
-// //             width: 200,
-// //             color: Colors.amber,
-// //            child: Row(
-// //             children: [
-// //             Expanded(
-// //   child: Text(
-// //     "datahhhhhhhهههههههههههغغغغغغغغiiiiii5555uuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-// //     overflow: TextOverflow.visible,
-// //     maxLines: 10,
-// //   ),
-// // ),
+//           Container(
+//             height: 70,
+//             width: 200,
+//             color: Colors.amber,
+//            child: Row(
+//             children: [
+//             Expanded(
+//   child: Text(
+//     "datahhhhhhhهههههههههههغغغغغغغغiiiiii5555uuuuuuuhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+//     overflow: TextOverflow.visible,
+//     maxLines: 10,
+//   ),
+// ),
 
-// //               SizedBox(width: 10,),
-// //               Padding(
-// //                 padding: const EdgeInsets.only(top: 15),
-// //                 child: Text("55"),
-// //               ),
-// //             ],
-// //            ),
-// //           ),
+//               SizedBox(width: 10,),
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 15),
+//                 child: Text("55"),
+//               ),
+//             ],
+//            ),
+//           ),
 //  Text('Content: ${widget.service?.content ?? ""}'),
 //            // Text('Index: ${widget.indexx ?? "No index available"}'),
 //             Text("hhh"),
 //            // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
-//             // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
-//        Text('Formatted Date on Another Pagehhhhh: ${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
-
+// //             // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
+// //        Text('Formatted Date on Another Pagehhhhh: ${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
+        
 //         ],
 //       ),
 
@@ -249,8 +146,7 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //   }
 // }
 
-
-
+//////////قبل
 
 
 
@@ -305,3 +201,45 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //     );
 //   }
 // }
+
+
+
+   ///////////////////////درست
+      // body: room == null ? Text('room required') :  ListView.builder(
+      //   itemCount: room!.messages.length,
+      //   itemBuilder: (context, index) {
+      //   final msg = room!.messages[index];
+      //   return ListTile(
+      //     title: Text(msg.servicenotif.content ?? 'Withot content'),
+      //   );
+      // },),
+///////////////////////////////درست
+///
+///بعد
+import 'package:flutter/material.dart';
+import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+
+class DetailsNotificationHistoryList extends StatelessWidget {
+
+  final RoomModel? room;
+  const DetailsNotificationHistoryList({super.key,required this.room});
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Details'),
+      ),
+      body: room == null ? Text('room required') :  ListView.builder(
+        itemCount: room!.messages.length,
+        itemBuilder: (context, index) {
+        final msg = room!.messages[index];
+        return ListTile(
+          title: Text(msg.servicenotif.content ?? 'Withot content'),
+        );
+        }
+    ));
+  }
+}
