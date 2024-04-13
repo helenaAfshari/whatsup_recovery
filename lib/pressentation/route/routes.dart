@@ -10,6 +10,7 @@ Map<String,Widget Function(BuildContext)> routes ={
   
  ScreenNames.introRoot : (contex) => IntroScreen(),
  ScreenNames.notificationHistoryScreen : (contex) => NotificationHistory(),
- ScreenNames.detailsNotificationHistoryListScreen : (contex) => DetailsNotificationHistoryList(formattedDatee: DateTime.now()),
+ScreenNames.detailsNotificationHistoryListScreen : (contex) => DetailsNotificationHistoryList(room: null),
+//  ScreenNames.detailsNotificationHistoryListScreen : (contex) => DetailsNotificationHistoryList(),
 
 };

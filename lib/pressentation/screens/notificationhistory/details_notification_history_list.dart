@@ -1,57 +1,64 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:notif/core/resource/constants/my_strings.dart';
 import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
-import 'package:notif/pressentation/blocs/detailsbloc/details_bloc.dart';
-import 'package:notif/pressentation/blocs/detailsbloc/details_event.dart';
-import 'package:notif/pressentation/blocs/detailsbloc/details_state.dart';
-import 'package:notification_listener_service/notification_event.dart';
-import 'package:notification_listener_service/notification_listener_service.dart';
 
-class DetailsNotificationHistoryList extends StatefulWidget {
-       List? notificationListt = <NotifWithTimeModel>[];
-       
-  final ServiceNotificationEvent? service;
-  final int? indexx;
-  //final DateTime time; // اضافه کردن پارامتر زمان
+class DetailsNotificationHistoryList extends StatelessWidget {
 
-  String? time;
-  final DateTime formattedDatee;
-  DetailsNotificationHistoryList({this.indexx,this.service,this.notificationListt,required this.formattedDatee});
+  final RoomModel? room;
+  const DetailsNotificationHistoryList({super.key,required this.room});
 
-  @override
-  State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
-}
-
-class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
-       List notificationListt = <NotifWithTimeModel>[];
   @override
   Widget build(BuildContext context) {
+
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
       ),
-      body: Column(
+      body: room == null ? Text('room required') :  ListView.builder(
+        itemCount: room!.messages.length,
+        itemBuilder: (context, index) {
+        final msg = room!.messages[index];
+        return ListTile(
+          title: Text(msg.servicenotif.content ?? 'Withot content'),
+        );
+      },),
+      /* body: Column(
         children: [
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount:notificationListDetails.length,
+          //     shrinkWrap: true,
+          //     itemBuilder:(context, index) {
+          //     return Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: Container(
+          //         height: 50,
+          //        width: 20,
+          //         color: const Color.fromARGB(255, 181, 174, 155),
+          //          child: Text(notificationListDetails[index].detailsText),
+          //         //child: Text(notification.textUser),
+                  
+          //       ),
+          //     );
+          //   },
+          //    ),
+          // ),
+
           Padding(
             padding: const EdgeInsets.only(left:160,top: 20),
             child: Container(
               decoration: BoxDecoration(
                     color: Color.fromARGB(255, 176, 227, 215),
                 borderRadius: BorderRadius.circular(10)),
-              width: 230,
-        
+              // width: 230,
             child: Column(
               children: [
                 Row(
                   children: [
                     Expanded(
                       child:
-                  Text(' ${widget.service?.content ?? ""}'),
-                  
+                  Text('${widget.service?.content ?? ""}'),
                     ),
                    
                     // Padding(
@@ -101,7 +108,64 @@ class _DetailsNotificationHistoryListState extends State<DetailsNotificationHist
 
         ],
       ),
-
+ */
     );
   }
 }
+
+
+
+
+
+
+
+// class DetailsNotificationHistoryList extends StatefulWidget {
+//   final List<NotifWithTimeModel>? notificationListt;
+//   final ServiceNotificationEvent? service;
+//   final DateTime formattedDatee;
+
+//   DetailsNotificationHistoryList({
+//     required this.notificationListt,
+//     required this.service,
+//     required this.formattedDatee,
+//   });
+
+//   @override
+//   State<DetailsNotificationHistoryList> createState() =>
+//       _DetailsNotificationHistoryListState();
+// }
+
+// class _DetailsNotificationHistoryListState
+//     extends State<DetailsNotificationHistoryList> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Details'),
+//       ),
+//       body: Column(
+//         children: [
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: widget.notificationListt!.length,
+//               shrinkWrap: true,
+//               itemBuilder: (context, index) {
+//                 final message = widget.notificationListt![index];
+//                 // Assuming content is the user message
+//                 return Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Container(
+//                     height: 50,
+//                     width: 20,
+//                     color: const Color.fromARGB(255, 181, 174, 155),
+//                     child: Text('${message.servicenotif.content ?? ""}'),
+//                   ),
+//                 );
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
