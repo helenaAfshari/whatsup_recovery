@@ -374,6 +374,7 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 
 ////////////////////اخر درسته
 
+
 // import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
 // import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
@@ -403,16 +404,17 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //         title: Text('Details::::::${widget.service!.id}'),
 //       ),
 //       body: ListView.builder(
-//         itemCount: widget.notificationListt!.length,
-//         itemBuilder: (context, index) {
-//           final notification = widget.notificationListt![index];
-//           return ListTile(
-//             title: Text(notification.servicenotif.content.toString()),
-//             subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
-//           );
-//         },
-//       ),
+//   reverse: false, // اینجا برای معکوس کردن لیست استفاده می‌شود
+//   itemCount: widget.notificationListt!.length,
+//   itemBuilder: (context, index) {
+//     final reversedIndex = widget.notificationListt!.length - 1 - index; // معکوس کردن ایندکس
+//     final notification = widget.notificationListt![reversedIndex];
+//     return ListTile(
+//       title: Text(notification.servicenotif.content.toString()),
+//       subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
 //     );
-//   }
-// }
+//   },
+// )
+// ,
+      
 /////////////اخر درسته
