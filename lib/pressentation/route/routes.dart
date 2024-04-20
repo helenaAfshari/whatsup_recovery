@@ -13,5 +13,7 @@ Map<String,Widget Function(BuildContext)> routes ={
 
 ScreenNames.detailsNotificationHistoryListScreen : (contex) => DetailsNotificationHistoryList(room: null),
 //  ScreenNames.detailsNotificationHistoryListScreen : (contex) => DetailsNotificationHistoryList(formattedDatee: DateTime.now()),
+//درست اخرش
+// ScreenNames.detailsNotificationHistoryListScreen : (contex) => DetailsNotificationHistoryList(formattedDatee: DateTime.now(), notificationListt: [],),
 
 };
