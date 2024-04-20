@@ -7,20 +7,20 @@ class NotifWithTimeModel{
 }
 
 
-//این برای  کلاس details برای اسکرین 
-class messageModel{
-   String detailsText;
-   DateTime date;
-  // ServiceNotificationEvent servicenotif;
-  messageModel({required this.detailsText,required this.date});
-}
+// //این برای  کلاس details برای اسکرین 
+// class messageModel{
+//    String detailsText;
+//    DateTime date;
+//   // ServiceNotificationEvent servicenotif;
+//   messageModel({required this.detailsText,required this.date});
+// }
 
 
-class userModel {
-  String name;
-  List<messageModel> messages;
-  userModel(this.messages,this.name);
-}
+// class userModel {
+//   String name;
+//   List<messageModel> messages;
+//   userModel(this.messages,this.name);
+// }
 
 
 

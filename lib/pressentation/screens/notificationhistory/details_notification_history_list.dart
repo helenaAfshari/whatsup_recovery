@@ -227,7 +227,6 @@ class DetailsNotificationHistoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Details'),
@@ -237,9 +236,183 @@ class DetailsNotificationHistoryList extends StatelessWidget {
         itemBuilder: (context, index) {
         final msg = room!.messages[index];
         return ListTile(
-          title: Text(msg.servicenotif.content ?? 'Withot content'),
+        // title: Text("hhhhh${msg.servicenotif.content}"),
+           title: Text(msg.servicenotif.content ?? 'Withot content'),
         );
         }
     ));
   }
 }
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+// class DetailsNotificationHistoryList extends StatefulWidget {
+//   final RoomModel? room;
+
+//   const DetailsNotificationHistoryList({Key? key, required this.room})
+//       : super(key: key);
+
+//   @override
+//   _DetailsNotificationHistoryListState createState() =>
+//       _DetailsNotificationHistoryListState();
+// }
+
+// class _DetailsNotificationHistoryListState
+//     extends State<DetailsNotificationHistoryList> {
+//   RoomModel? selectedMessage;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Details'),
+//       ),
+//       body: widget.room == null
+//           ? Text('room required')
+//           : ListView.builder(
+//               itemCount: widget.room!.messages.length,
+//               itemBuilder: (context, index) {
+//                 final msg = widget.room!.messages[index];
+//                 return
+//                 Text(msg.servicenotif.content ?? 'Without content');
+//               }),
+//     );
+//   }
+// }
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+// import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+// import 'package:notification_listener_service/notification_event.dart';
+
+// class DetailsNotificationHistoryList extends StatefulWidget {
+//        List? notificationListt = <NotifWithTimeModel>[];
+       
+//   final ServiceNotificationEvent? service;
+//   final int? indexx;
+//   //final DateTime time; // اضافه کردن پارامتر زمان
+
+//   String? time;
+//   final DateTime formattedDatee;
+//    NotifWithTimeModel? selectedMessage;
+//   DetailsNotificationHistoryList({this.indexx,this.service,this.notificationListt,required this.formattedDatee});
+
+//   @override
+//   State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
+// }
+
+// class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
+//        List notificationListt = <NotifWithTimeModel>[];
+       
+//   @override
+//   Widget build(BuildContext context) {
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Details::::::${widget.service!.id}'),
+//       ),
+//       body: Column(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.only(left:160,top: 20),
+//             child: Container(
+//               decoration: BoxDecoration(
+//                     color: Color.fromARGB(255, 176, 227, 215),
+//                 borderRadius: BorderRadius.circular(10)),
+//               width: 230,
+        
+//             child: Column(
+//               children: [
+//                 Row(
+//                   children: [
+//                     Expanded(
+//                       child:
+//                   Text(' ${widget.service?.content ?? ""}'),
+                  
+//                     ),
+                   
+//                   ],
+//                 ),
+//      Padding(
+//        padding: const EdgeInsets.only(left: 90),
+//        child: Text('${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
+//      ),
+
+//               ],
+//             ),
+//           ),
+//           ),
+
+
+//  Text('Content: ${widget.service?.content ?? ""}'),
+//             Text("hhh"),
+//        Text('Formatted Date on Another Pagehhhhh: ${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
+
+//         ],
+//       ),
+
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+////////////////////اخر درسته
+
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+// import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+// import 'package:notification_listener_service/notification_event.dart';
+// class DetailsNotificationHistoryList extends StatefulWidget {
+//   final List<NotifWithTimeModel>? notificationListt; // Pass the list of notifications
+//   final ServiceNotificationEvent? service;
+//   final int? indexx;
+//   final DateTime formattedDatee;
+
+//   DetailsNotificationHistoryList({
+//     this.indexx,
+//     this.service,
+//     required this.notificationListt,
+//     required this.formattedDatee,
+//   });
+
+//   @override
+//   State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
+// }
+
+// class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Details::::::${widget.service!.id}'),
+//       ),
+//       body: ListView.builder(
+//         itemCount: widget.notificationListt!.length,
+//         itemBuilder: (context, index) {
+//           final notification = widget.notificationListt![index];
+//           return ListTile(
+//             title: Text(notification.servicenotif.content.toString()),
+//             subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+/////////////اخر درسته
