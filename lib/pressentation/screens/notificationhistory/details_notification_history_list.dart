@@ -216,33 +216,40 @@
 ///////////////////////////////درست
 ///
 ///بعد
-import 'package:flutter/material.dart';
-import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+// import 'package:flutter/material.dart';
+// import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
 
-class DetailsNotificationHistoryList extends StatelessWidget {
+// class DetailsNotificationHistoryList extends StatelessWidget {
 
-  final RoomModel? room;
-  const DetailsNotificationHistoryList({super.key,required this.room});
+//   final RoomModel? room;
+//   const DetailsNotificationHistoryList({super.key,required this.room});
 
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Details'),
-      ),
-      body: room == null ? Text('room required') :  ListView.builder(
-        itemCount: room!.messages.length,
-        itemBuilder: (context, index) {
-        final msg = room!.messages[index];
-        return ListTile(
-        // title: Text("hhhhh${msg.servicenotif.content}"),
-           title: Text(msg.servicenotif.content ?? 'Withot content'),
-        );
-        }
-    ));
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Details'),
+//       ),
+//          body: room == null ? Text('room required') :  ListView.builder(
+//         itemCount: room!.messages.length,
+//         itemBuilder: (context, index) {
+//         final msg = room!.messages[index];
+//         return ListTile(
+//           title: Text(msg.servicenotif.content ?? 'Withot content'),
+//         );
+//       },));
+//     //   body: room == null ? Text('room required') :  ListView.builder(
+//     //     itemCount: room!.messages.length,
+//     //     itemBuilder: (context, index) {
+//     //     final msg = room!.messages[index];
+//     //     return ListTile(
+//     //     // title: Text("hhhhh${msg.servicenotif.content}"),
+//     //        title: Text(msg.servicenotif.content ?? 'Withot content'),
+//     //     );
+//     //     }
+//     // ));
+//   }
+// }
 
 
 
@@ -375,34 +382,73 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 ////////////////////اخر درسته
 
 
-// import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
-// import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
-// import 'package:notification_listener_service/notification_event.dart';
-// class DetailsNotificationHistoryList extends StatefulWidget {
-//   final List<NotifWithTimeModel>? notificationListt; // Pass the list of notifications
-//   final ServiceNotificationEvent? service;
-//   final int? indexx;
-//   final DateTime formattedDatee;
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+import 'package:notification_listener_service/notification_event.dart';
+class DetailsNotificationHistoryList extends StatefulWidget {
+  final List<NotifWithTimeModel>? notificationListt; // Pass the list of notifications
+  final ServiceNotificationEvent? service;
+  final int? indexx;
+  final DateTime formattedDatee;
 
-//   DetailsNotificationHistoryList({
-//     this.indexx,
-//     this.service,
-//     required this.notificationListt,
-//     required this.formattedDatee,
-//   });
+  DetailsNotificationHistoryList({
+    this.indexx,
+    this.service,
+    required this.notificationListt,
+    required this.formattedDatee,
+  });
 
-//   @override
-//   State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
-// }
+  @override
+  State<DetailsNotificationHistoryList> createState() => _DetailsNotificationHistoryListState();
+}
 
-// class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Details::::::${widget.service!.id}'),
-//       ),
+class _DetailsNotificationHistoryListState extends State<DetailsNotificationHistoryList> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Details::::::${widget.service!.id}'),
+      ),
+    body: ListView.builder(
+  reverse: false, // اینجا برای معکوس کردن لیست استفاده می‌شود
+  itemCount: widget.notificationListt!.length,
+  itemBuilder: (context, index) {
+    final reversedIndex = widget.notificationListt!.length - 1 - index; // معکوس کردن ایندکس
+    final notification = widget.notificationListt![reversedIndex];
+    
+    // افزودن شرط برای نمایش تنها پیام‌های واتس‌اپ و نادیده گرفتن پیام‌های حاوی "X new message"
+    if (notification.servicenotif.packageName == "com.whatsapp" && !notification.servicenotif.content.toString().contains(RegExp(r'\d+ new message'))) {
+      return ListTile(
+        title: Text(notification.servicenotif.content.toString()),
+        subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
+      );
+    } else {
+      return Container(); // اگر نوع سرویس پیام واتس‌اپ نبود یا پیام حاوی "X new message" بود، لیست‌تایل خالی برگردانید
+    }
+  },
+),
+
+
+//   body: ListView.builder(
+//   reverse: false, // اینجا برای معکوس کردن لیست استفاده می‌شود
+//   itemCount: widget.notificationListt!.length,
+//   itemBuilder: (context, index) {
+//     final reversedIndex = widget.notificationListt!.length - 1 - index; // معکوس کردن ایندکس
+//     final notification = widget.notificationListt![reversedIndex];
+    
+//     // افزودن شرط برای نمایش تنها پیام‌های واتس‌اپ
+//     if (notification.servicenotif.packageName == "com.whatsapp") {
+//       return ListTile(
+//         title: Text(notification.servicenotif.content.toString()),
+//         subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
+//       );
+//     } else {
+//       return Container(); // اگر نوع سرویس پیام واتس‌اپ نبود، لیست‌تایل خالی برگردانید
+//     }
+//   },
+// )
+);
 //       body: ListView.builder(
 //   reverse: false, // اینجا برای معکوس کردن لیست استفاده می‌شود
 //   itemCount: widget.notificationListt!.length,
@@ -414,7 +460,6 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //       subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
 //     );
 //   },
-// )
-// ,
-      
+// ));
+  }}
 /////////////اخر درسته
