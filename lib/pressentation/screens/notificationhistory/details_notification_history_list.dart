@@ -349,23 +349,30 @@ class DetailsNotificationHistoryList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              notification.servicenotif.content.toString(),
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 8),
               child: Text(
-                DateFormat('HH:mm:ss a').format(notification.date),
+                notification.servicenotif.content.toString(),
                 style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
+                  fontSize: 16,
                 ),
               ),
             ),
+           
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  DateFormat('HH:mm:ss a').format(notification.date),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 5,)
           ],
         ),
       ),
