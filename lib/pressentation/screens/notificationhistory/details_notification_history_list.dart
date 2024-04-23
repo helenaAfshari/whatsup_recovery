@@ -239,18 +239,181 @@ class DetailsNotificationHistoryList extends StatelessWidget {
       //     title: Text(msg.servicenotif.content ?? 'Withot content'),
       //   );
       // },)
-         body: ListView.builder(
-  reverse: false, // اینجا برای معکوس کردن لیست استفاده می‌شود
+//       body: ListView(
+//   reverse: false,
+//   children: List.generate(
+//     room?.messages.length ?? 0,
+//     (index) {
+//       final reversedIndex = room!.messages.length - 1 - index;
+//       final notification = room!.messages[reversedIndex];
+//       if (notification.servicenotif.packageName == "com.whatsapp" &&
+//           !notification.servicenotif.content.toString().contains(RegExp(r'\d+ new message'))) {
+//         return Padding(
+//           padding: const EdgeInsets.symmetric(vertical: 4.0),
+//           child: Align(
+//             alignment: Alignment.centerRight,
+//             child: Padding(
+//               padding: const EdgeInsets.only(left: 100, right: 10),
+//               child: Card(
+//                 color: Color.fromARGB(255, 209, 243, 226),
+//                 elevation: 8,
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(8.0),
+//                   child: Text(notification.servicenotif.content.toString()),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         );
+//       } else {
+//         return Container();
+//       }
+//     },
+//   ),
+// ));
+   body: ListView.builder(
+   reverse: true, // اینجا برای معکوس کردن لیست استفاده می‌شود
    itemCount:room?.messages.length ?? 0,
    itemBuilder: (context, index) {
     final reversedIndex = room!.messages.length - 1 - index; // معکوس کردن ایندکس
      final notification = room!.messages[reversedIndex];
-     return ListTile(
-       title: Text(notification.servicenotif.content.toString()),
-       subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
-     );
-   },
- ));
+     if (notification.servicenotif.packageName == "com.whatsapp" &&
+     !notification.servicenotif.content.toString().contains(RegExp(r'\d+ new message'))) {
+      return 
+      // Row(
+      //   mainAxisAlignment: MainAxisAlignment.end,
+      //   children: [
+      //     Card(
+      //       color: Colors.amber,
+      //       child: Stack(
+      //         children: [
+      //         Column(
+      //           children: [
+      //            Align(
+      //     alignment: Alignment.bottomRight,
+      //     child: Text(
+      //       notification.servicenotif.content.toString(),
+      //       overflow: TextOverflow.ellipsis,
+      //     ),
+      //     ),
+      //             Align(
+      //               alignment: Alignment.centerLeft,
+      //               child: Text(DateFormat('HH:mm:ss a').format(notification.date)))
+      //           ],
+      //         ),
+      //         ],
+      //       ),
+      //     ),
+      //   ],
+      // );
+
+    // Align(
+    //     alignment: Alignment.centerRight,
+    //     child: Padding(
+    //       padding: const EdgeInsets.only(left: 100,right: 10),
+    //       child: Row(
+    //         mainAxisAlignment: MainAxisAlignment.end,
+    //         children: [
+    //           Card(
+    //             color: Color.fromARGB(255, 209, 243, 226),
+    //             elevation: 8,
+    //           child: Column(
+    //             children: [
+    // Text(
+    // notification.servicenotif.content.toString(),
+    // style: TextStyle(
+    // fontSize: 16,
+    // fontWeight: FontWeight.bold,
+    // ),
+    // textAlign: TextAlign.center, // تنظیم متن در وسط
+    // ),
+    //                 // Text(DateFormat('HH:mm:ss a').format(notification.date)),
+    //             ],
+    //           ),
+    //           ),
+
+
+    //         ],
+    //       ),
+    //     ),
+    //   );
+
+    Align(
+  alignment: Alignment.centerRight,
+  child: Padding(
+    padding: const EdgeInsets.only(left: 100, right: 10),
+    child: Card(
+      color: Color.fromARGB(255, 209, 243, 226),
+      elevation: 8,
+      child: IntrinsicWidth(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              notification.servicenotif.content.toString(),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                DateFormat('HH:mm:ss a').format(notification.date),
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ),
+);
+    ////////////////درستتت
+      // Align(
+      //   alignment: Alignment.centerRight,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 100,right: 10),
+      //     child: Card(
+      //       color: Color.fromARGB(255, 209, 243, 226),
+      //       elevation: 8,
+      //     child: Text(notification.servicenotif.content.toString()),
+      //     ),
+      //   ),
+      // );
+      }}
+      ),
+      );
+  }}
+  ///درستتتتت
+  ///
+  ///
+  ///
+
+
+
+//       // return Padding(
+//       //   padding: const EdgeInsets.all(8.0),
+//       //   child: Container(
+//       //     height: 70,
+//       //     width: 200,
+//       //     color: Colors.amber,
+//       //     child: ListTile(
+//       //       title: Text(notification.servicenotif.content.toString()),
+//       //       subtitle: Text(DateFormat('HH:mm:ss a').format(notification.date)),
+//       //       leading:  Text(notification.servicenotif.title.toString()),
+//       //     ),
+//       //   ),
+//       // );
+//     } else {
+//       return Container(); // اگر نوع سرویس پیام واتس‌اپ نبود یا پیام حاوی "X new message" بود، لیست‌تایل خالی برگردانید
+//     }
+   
+//    },
+//  ));
       
 //     //   body: room == null ? Text('room required') :  ListView.builder(
 //     //     itemCount: room!.messages.length,
@@ -262,8 +425,8 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //     //     );
 //     //     }
 //     // ));
-   }
- }
+  //  }
+  //    }));
 
 
 

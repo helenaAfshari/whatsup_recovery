@@ -246,6 +246,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
     return BlocProvider(
       create: (context) => HomeBloc()..add(HomeLoadedEvent()),
       child: Scaffold(
+        backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text("Notification history"),
             backgroundColor: Colors.amber,
@@ -282,53 +283,145 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                                   )));
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.all(10),
-                                  margin: EdgeInsets.all(10),
-                                  color: Colors.deepPurple,
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            decoration: const BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/user_profile.png'), // نمایش تصویر
-                                                  fit: BoxFit
-                                                      .cover, // تنظیم حالت نمایش تصویر
-                                                ),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(50))),
-                                            height: 50,
-                                            width: 50,
-                                          ),
+                                  height: 75,
+                                  width: 200,
+  padding: EdgeInsets.all(10),
+  margin: EdgeInsets.all(10),
+  color: Colors.white,
+  child: Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/user_profile.png'), // نمایش تصویر
+            fit: BoxFit.cover, // تنظیم حالت نمایش تصویر
+          ),
+          borderRadius: BorderRadius.all(Radius.circular(50)),
+        ),
+        height: 50,
+        width: 50,
+      ),
+      SizedBox(width: 10),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              room.lastMsg.servicenotif.title!,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              room.lastMsg.servicenotif.content!,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+         Text(DateFormat('HH:mm:ss a')
+        .format(room.lastMsg.date)),
+    ],
+  ),
+),
 
-                                          Expanded(
-                                            child: Text(
-                                              room.lastMsg.servicenotif.content!,
-                                              maxLines:
-                                                  1, // تعداد خطوط مورد نظر (در اینجا یک خط)
-                                              overflow: TextOverflow
-                                                  .ellipsis, // نمایش سه نقطه در صورت اتمام متن
-                                            ),
-                                          ),
-                                          // Gap(200),
+//                                 child: Container(
+//                                   padding: EdgeInsets.all(10),
+//                                   margin: EdgeInsets.all(10),
+//                                   color: Colors.deepPurple,
+//                                   child: Column(
+//                                     children: [
+//                                       Row(
+//                                         children: [
+//                                           Container(
+//                                             decoration: const BoxDecoration(
+//                                                 image: DecorationImage(
+//                                                   image: AssetImage(
+//                                                       'assets/images/user_profile.png'), // نمایش تصویر
+//                                                   fit: BoxFit
+//                                                       .cover, // تنظیم حالت نمایش تصویر
+//                                                 ),
+//                                                 borderRadius: BorderRadius.all(
+//                                                     Radius.circular(50))),
+//                                             height: 50,
+//                                             width: 50,
+//                                           ),
+                                    
+//    Column(
+//   children: [
+//  Row(
+//   children: [
+//     Padding(
+//       padding: const EdgeInsets.only(right: 62),
+//       child: Text(
+//         "5555555555555555555555lllllllllllllllllllllhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
+//         // room.lastMsg.servicenotif.content!,
+//         maxLines: 1,
+        
+//         overflow: TextOverflow.fade,
+      
+//       ),
+//     ),
+//   ],
+// ),
 
-                                          Row(
-                                            children: [
-                                              Text(room.lastMsg.servicenotif.title!),
-                                              //              Center(
-                                              //   child: Text('Formatted Date: $formattedDate'),
-                                              //  ),
-                                              Text(DateFormat('HH:mm:ss a')
-                                                  .format(room.lastMsg.date)),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+//     // SizedBox(height: 10), // یک فاصله‌ی عمودی بین متن و زمان
+//     Row(
+//       children: [
+//         Text(
+//           DateFormat('HH:mm:ss a').format(room.lastMsg.date),
+//         ),
+//       ],
+//     ),
+//   ],
+// )
+
+//                                         //  Text(room.lastMsg.servicenotif.title!),
+
+//                                         //   // Expanded(
+//                                         //   //   child: Text(
+//                                         //   //     room.lastMsg.servicenotif.content!,
+//                                         //   //     maxLines:
+//                                         //   //         1, // تعداد خطوط مورد نظر (در اینجا یک خط)
+//                                         //   //     overflow: TextOverflow
+//                                         //   //         .ellipsis, // نمایش سه نقطه در صورت اتمام متن
+//                                         //   //   ),
+//                                         //   // ),
+
+//                                         //   // Gap(200),
+//                                         //     SizedBox(width: 100,),
+//                                         //   Column(
+//                                         //     children: [
+//                                         //       Row(
+//                                         //         children: [
+//                                         //           // Text(room.lastMsg.servicenotif.title!),
+//                                         //           //              Center(
+//                                         //           //   child: Text('Formatted Date: $formattedDate'),
+//                                         //           //  ),
+//                                         //           Text(DateFormat('HH:mm:ss a')
+//                                         //               .format(room.lastMsg.date)),
+//                                         //         ],
+//                                         //       ),
+                                            
+//                                         //       // Text("ggg"),
+//                                         //     ],
+//                                         //   ),
+//                                         ],
+//                                       ),
+//                                         // Padding(
+//                                         //   padding: const EdgeInsets.only(right: 250),
+//                                         //   child: Text(
+//                                         //     room.lastMsg.servicenotif.content!,
+//                                         //     maxLines:
+//                                         //         1, // تعداد خطوط مورد نظر (در اینجا یک خط)
+//                                         //     overflow: TextOverflow
+//                                         //         .ellipsis, // نمایش سه نقطه در صورت اتمام متن
+//                                         //   ),
+//                                         // ),
+//                                     ],
+//                                   ),
+//                                 ),
                               );
                             }
                           } else {
