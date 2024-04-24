@@ -271,127 +271,136 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //     },
 //   ),
 // ));
-   body: ListView.builder(
-   reverse: true, // اینجا برای معکوس کردن لیست استفاده می‌شود
-   itemCount:room?.messages.length ?? 0,
-   itemBuilder: (context, index) {
-    final reversedIndex = room!.messages.length - 1 - index; // معکوس کردن ایندکس
-     final notification = room!.messages[reversedIndex];
-     if (notification.servicenotif.packageName == "com.whatsapp" &&
-     !notification.servicenotif.content.toString().contains(RegExp(r'\d+ new message'))) {
-      return 
-      // Row(
-      //   mainAxisAlignment: MainAxisAlignment.end,
-      //   children: [
-      //     Card(
-      //       color: Colors.amber,
-      //       child: Stack(
+   body: Container(
+    decoration: BoxDecoration(
+      image: DecorationImage(
+        fit: BoxFit.fill,
+        image: AssetImage("assets/images/background.png"),
+    ),
+    
+   ),
+   child: ListView.builder(
+     reverse: true, // اینجا برای معکوس کردن لیست استفاده می‌شود
+     itemCount:room?.messages.length ?? 0,
+     itemBuilder: (context, index) {
+      final reversedIndex = room!.messages.length - 1 - index; // معکوس کردن ایندکس
+       final notification = room!.messages[reversedIndex];
+       if (notification.servicenotif.packageName == "com.whatsapp" &&
+       !notification.servicenotif.content.toString().contains(RegExp(r'\d+ new message'))) {
+        return 
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   children: [
+        //     Card(
+        //       color: Colors.amber,
+        //       child: Stack(
+        //         children: [
+        //         Column(
+        //           children: [
+        //            Align(
+        //     alignment: Alignment.bottomRight,
+        //     child: Text(
+        //       notification.servicenotif.content.toString(),
+        //       overflow: TextOverflow.ellipsis,
+        //     ),
+        //     ),
+        //             Align(
+        //               alignment: Alignment.centerLeft,
+        //               child: Text(DateFormat('HH:mm:ss a').format(notification.date)))
+        //           ],
+        //         ),
+        //         ],
+        //       ),
+        //     ),
+        //   ],
+        // );
+   
+      // Align(
+      //     alignment: Alignment.centerRight,
+      //     child: Padding(
+      //       padding: const EdgeInsets.only(left: 100,right: 10),
+      //       child: Row(
+      //         mainAxisAlignment: MainAxisAlignment.end,
       //         children: [
-      //         Column(
-      //           children: [
-      //            Align(
-      //     alignment: Alignment.bottomRight,
-      //     child: Text(
-      //       notification.servicenotif.content.toString(),
-      //       overflow: TextOverflow.ellipsis,
-      //     ),
-      //     ),
-      //             Align(
-      //               alignment: Alignment.centerLeft,
-      //               child: Text(DateFormat('HH:mm:ss a').format(notification.date)))
-      //           ],
-      //         ),
+      //           Card(
+      //             color: Color.fromARGB(255, 209, 243, 226),
+      //             elevation: 8,
+      //           child: Column(
+      //             children: [
+      // Text(
+      // notification.servicenotif.content.toString(),
+      // style: TextStyle(
+      // fontSize: 16,
+      // fontWeight: FontWeight.bold,
+      // ),
+      // textAlign: TextAlign.center, // تنظیم متن در وسط
+      // ),
+      //                 // Text(DateFormat('HH:mm:ss a').format(notification.date)),
+      //             ],
+      //           ),
+      //           ),
+   
+   
       //         ],
       //       ),
       //     ),
-      //   ],
-      // );
-
-    // Align(
-    //     alignment: Alignment.centerRight,
-    //     child: Padding(
-    //       padding: const EdgeInsets.only(left: 100,right: 10),
-    //       child: Row(
-    //         mainAxisAlignment: MainAxisAlignment.end,
-    //         children: [
-    //           Card(
-    //             color: Color.fromARGB(255, 209, 243, 226),
-    //             elevation: 8,
-    //           child: Column(
-    //             children: [
-    // Text(
-    // notification.servicenotif.content.toString(),
-    // style: TextStyle(
-    // fontSize: 16,
-    // fontWeight: FontWeight.bold,
-    // ),
-    // textAlign: TextAlign.center, // تنظیم متن در وسط
-    // ),
-    //                 // Text(DateFormat('HH:mm:ss a').format(notification.date)),
-    //             ],
-    //           ),
-    //           ),
-
-
-    //         ],
-    //       ),
-    //     ),
-    //   );
-
-    Align(
-  alignment: Alignment.centerRight,
-  child: Padding(
-    padding: const EdgeInsets.only(left: 100, right: 10),
-    child: Card(
-      color: Color.fromARGB(255, 209, 243, 226),
-      elevation: 8,
-      child: IntrinsicWidth(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10,top: 8),
-              child: Text(
-                notification.servicenotif.content.toString(),
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-           
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10),
+      //   );
+   
+      Align(
+     alignment: Alignment.centerRight,
+     child: Padding(
+      padding: const EdgeInsets.only(left: 100, right: 10),
+      child: Card(
+        color: Color.fromARGB(255, 209, 243, 226),
+        elevation: 8,
+        child: IntrinsicWidth(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10,top: 8),
                 child: Text(
-                  DateFormat('HH:mm:ss a').format(notification.date),
+                  notification.servicenotif.content.toString(),
                   style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.grey,
+                    fontSize: 16,
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 5,)
-          ],
+             
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    DateFormat('HH:mm:ss a').format(notification.date),
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5,)
+            ],
+          ),
         ),
       ),
-    ),
-  ),
-);
-    ////////////////درستتت
-      // Align(
-      //   alignment: Alignment.centerRight,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(left: 100,right: 10),
-      //     child: Card(
-      //       color: Color.fromARGB(255, 209, 243, 226),
-      //       elevation: 8,
-      //     child: Text(notification.servicenotif.content.toString()),
-      //     ),
-      //   ),
-      // );
-      }}
+     ),
+   );
+      ////////////////درستتت
+        // Align(
+        //   alignment: Alignment.centerRight,
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(left: 100,right: 10),
+        //     child: Card(
+        //       color: Color.fromARGB(255, 209, 243, 226),
+        //       elevation: 8,
+        //     child: Text(notification.servicenotif.content.toString()),
+        //     ),
+        //   ),
+        // );
+        }}
+        ),
       ),
       );
   }}

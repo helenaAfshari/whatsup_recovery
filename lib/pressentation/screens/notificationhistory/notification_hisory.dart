@@ -223,7 +223,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
           //  new nessage from exist user
           rooms[rIndex]..messages.add(msg)..lastMsg = msg..date = DateTime.now();
         }
-         rooms.sort((a, b) => b.date.compareTo(a.date));
+        //  rooms.sort((a, b) => b.date.compareTo(a.date));
        /*  notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
         notificationListt.forEach((element) {
           if (userlist.length < notificationListt.length) {
@@ -237,7 +237,9 @@ class _NotificationHistoryState extends State<NotificationHistory> {
         }); */
         //formattedDate = formatDate(DateTime.now());
       });
+       rooms.sort((a, b) => b.date.compareTo(a.date));
     });
+     
     //formattedDate = formatDate(DateTime.now());
   }
 
