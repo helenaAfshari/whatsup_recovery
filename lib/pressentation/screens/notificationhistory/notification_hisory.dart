@@ -38,7 +38,7 @@
 //       } });
 //           //formattedDate = formatDate(DateTime.now());
 //       });
-      
+
 //     });
 //     //formattedDate = formatDate(DateTime.now());
 //   }
@@ -49,13 +49,13 @@
 //       child: Scaffold(
 //           appBar: AppBar(
 //             title: Text("Notification history"),
-//             backgroundColor: Colors.amber, 
+//             backgroundColor: Colors.amber,
 //       ),
 //       drawer: DrawerWidget(),
 //         body:
 //            BlocBuilder<HomeBloc,HomeState>(builder: (context, state) {
 //             if(state is LoadedHomeState){
-//                   return 
+//                   return
 //               Column(
 //   children: [
 //     Expanded(
@@ -68,7 +68,7 @@
 //             if(notification.servicenotif.content.toString().contains("new messages")==true){
 //     return Container();
 //             }else{
-//   return 
+//   return
 //   GestureDetector(
 //     onTap: () {
 //       print("gggggkkkllll");
@@ -80,15 +80,14 @@
 //       // indexx: index,
 //       // formattedDatee: formattedDate,
 //        formattedDatee: notification.date,
-       
+
 //       //notificationListt:notification.date,
-      
+
 //      // time: DateFormat('HH:mm:ss a').format(notification.date),
 // // اضافه کردن زمان
 //     ),
 //   ),
 // ));
-
 
 //    },
 //     child: Container(
@@ -110,7 +109,7 @@
 //                           height: 50,
 //                           width: 50,
 //                          ),
-                     
+
 //                     Expanded(
 //                         child: Text(notification.servicenotif.content!,
 //                         maxLines: 1, // تعداد خطوط مورد نظر (در اینجا یک خط)
@@ -118,7 +117,7 @@
 //                       ),
 //                       ),
 //                        // Gap(200),
-                       
+
 //                        Row(
 //                         children: [
 //                   Text(notification.servicenotif.title!),
@@ -135,7 +134,7 @@
 //               ),
 //   );
 //             }
-            
+
 //           } else {
 //             return SizedBox(); // نوتیفیکیشن هایی که شروع به com.whatsapp نمی‌کنند، اینجا حذف می‌شوند
 //           }
@@ -144,7 +143,7 @@
 //     ),
 //   ],
 // );
-            
+
 //             }
 //             return Container(height:  50,width: 50,color: Colors.amber,);
 //            },)
@@ -157,12 +156,7 @@
 //   }
 // }
 
-
-
-
-
-
-// //////بعدش 
+// //////بعدش
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -186,45 +180,60 @@ class _NotificationHistoryState extends State<NotificationHistory> {
   // List<userModel> userlist = [];
   // List<messageModel> messageList = [];
   // List notificationListtrrrr = <messageModel>[];
-  final  rooms = <RoomModel>[];
+  final rooms = <RoomModel>[];
   String formattedDate = '';
 
   @override
   void initState() {
     super.initState();
+    /// get all rooms from database
+
+
+
     NotificationListenerService.notificationsStream.listen((event) {
       print("Curent notification: $event");
-      if(event.hasRemoved ?? false || !(event.canReply ?? false)){
+      if (event.hasRemoved ?? false) {
         return;
       }
 
-        final msg = NotifWithTimeModel(DateTime.now(), event);
+      if(!(event.packageName == 'com.whatsapp')){
+        return;
+      }
+      final msg = NotifWithTimeModel(DateTime.now(), event);
 
-        if(msg.servicenotif.title == 'WhatsApp'){
-          return; 
-        }
+      if (msg.servicenotif.title == 'WhatsApp') {
+        return;
+      } else if(RegExp(r'\d+ new message').hasMatch(msg.servicenotif.content!)){
+        return;
+      }
 
-        int rIndex = rooms.indexWhere((room) => room.name == event.title);
+      int rIndex = rooms.indexWhere((room) => room.name == event.title);
 
       setState(() {
-        if(rIndex == -1){
+        if (rIndex == -1) {
           // new message from a new user
-           rooms.add(RoomModel(
-           name: event.title ?? 'Unknown', 
-           date: DateTime.now(), 
-           lastMsg: msg,
-           messages: [msg])
-           );
+          rooms.add(RoomModel(
+              name: event.title ?? 'Unknown',
+              date: DateTime.now(),
+              lastMsg: msg,
+              messages: [msg]));
         } else {
-
-          if(rooms[rIndex].messages.isNotEmpty && rooms[rIndex].messages.last.servicenotif.content == msg.servicenotif.content){
+          /* if(
+          rooms[rIndex].lastMsg.servicenotif.content == msg.servicenotif.content){
             return;
-          }
+          } */
+          // if(rooms[rIndex].messages.isNotEmpty &&
+          // rooms[rIndex].messages.last.servicenotif.content == msg.servicenotif.content){
+          //   return;
+          // }
           //  new nessage from exist user
-          rooms[rIndex]..messages.add(msg)..lastMsg = msg..date = DateTime.now();
+          rooms[rIndex]
+            ..messages.add(msg)
+            ..lastMsg = msg
+            ..date = DateTime.now();
         }
         //  rooms.sort((a, b) => b.date.compareTo(a.date));
-       /*  notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
+        /*  notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
         notificationListt.forEach((element) {
           if (userlist.length < notificationListt.length) {
             messageList.add(messageModel(
@@ -237,9 +246,11 @@ class _NotificationHistoryState extends State<NotificationHistory> {
         }); */
         //formattedDate = formatDate(DateTime.now());
       });
-       rooms.sort((a, b) => b.date.compareTo(a.date));
+      rooms.sort((a, b) => b.date.compareTo(a.date));
+      /// insert data in dattabase here
+      // rooms ==> database
     });
-     
+
     //formattedDate = formatDate(DateTime.now());
   }
 
@@ -248,7 +259,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
     return BlocProvider(
       create: (context) => HomeBloc()..add(HomeLoadedEvent()),
       child: Scaffold(
-        backgroundColor: Colors.white,
+          backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text("Notification history"),
             backgroundColor: Colors.amber,
@@ -264,69 +275,69 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                         itemCount: rooms.length,
                         itemBuilder: (BuildContext context, int index) {
                           final room = rooms[index];
-                          if (room.lastMsg.servicenotif.packageName?.startsWith("com.whatsapp") ?? false) {
-                            if (room.lastMsg.servicenotif.content
-                                    .toString()
-                                    .contains("new messages") ==
-                                true) {
-                              return Container();
-                            } else { 
-                              return GestureDetector(
+                           return GestureDetector(
                                 onTap: () {
                                   print("gggggkkkllll");
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                      create: (context) => HomeBloc(),
-                                      child: DetailsNotificationHistoryList(
-                                        room: room,
+                                      builder: (context) => BlocProvider(
+                                            create: (context) => HomeBloc(),
+                                            child:
+                                                DetailsNotificationHistoryList(
+                                              room: room,
 // // اضافه کردن زمان
 //                                       ),
-                                    ),
-                                  )));
+                                            ),
+                                          )));
                                 },
                                 child: Container(
                                   height: 75,
                                   width: 200,
-  padding: EdgeInsets.all(10),
-  margin: EdgeInsets.all(10),
-  color: Colors.white,
-  child: Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/user_profile.png'), // نمایش تصویر
-            fit: BoxFit.cover, // تنظیم حالت نمایش تصویر
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
-        height: 50,
-        width: 50,
-      ),
-      SizedBox(width: 10),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              room.lastMsg.servicenotif.title!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              room.lastMsg.servicenotif.content!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ),
-      ),
-         Text(DateFormat('HH:mm:ss a')
-        .format(room.lastMsg.date)),
-    ],
-  ),
-),
+                                  padding: EdgeInsets.all(10),
+                                  margin: EdgeInsets.all(10),
+                                  color: Colors.white,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                'assets/images/user_profile.png'), // نمایش تصویر
+                                            fit: BoxFit
+                                                .cover, // تنظیم حالت نمایش تصویر
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50)),
+                                        ),
+                                        height: 50,
+                                        width: 50,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              room.lastMsg.servicenotif.title!,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Text(
+                                              room.lastMsg.servicenotif
+                                                  .content!,
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Text(DateFormat('HH:mm:ss a')
+                                          .format(room.lastMsg.date)),
+                                    ],
+                                  ),
+                                ),
 
 //                                 child: Container(
 //                                   padding: EdgeInsets.all(10),
@@ -349,7 +360,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                                             height: 50,
 //                                             width: 50,
 //                                           ),
-                                    
+
 //    Column(
 //   children: [
 //  Row(
@@ -360,9 +371,9 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //         "5555555555555555555555lllllllllllllllllllllhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
 //         // room.lastMsg.servicenotif.content!,
 //         maxLines: 1,
-        
+
 //         overflow: TextOverflow.fade,
-      
+
 //       ),
 //     ),
 //   ],
@@ -405,7 +416,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                                         //               .format(room.lastMsg.date)),
 //                                         //         ],
 //                                         //       ),
-                                            
+
 //                                         //       // Text("ggg"),
 //                                         //     ],
 //                                         //   ),
@@ -425,10 +436,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                                   ),
 //                                 ),
                               );
-                            }
-                          } else {
-                            return SizedBox(); // نوتیفیکیشن هایی که شروع به com.whatsapp نمی‌کنند، اینجا حذف می‌شوند
-                          }
+                            
                         },
                       ),
                     ),
@@ -449,35 +457,6 @@ class _NotificationHistoryState extends State<NotificationHistory> {
     return DateFormat('HH:mm:ss a').format(date);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
@@ -509,7 +488,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //         notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
 //           //formattedDate = formatDate(DateTime.now());
 //       });
-      
+
 //     });
 //     //formattedDate = formatDate(DateTime.now());
 //   }
@@ -520,13 +499,13 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //       child: Scaffold(
 //           appBar: AppBar(
 //             title: Text("Notification history"),
-//             backgroundColor: Colors.amber, 
+//             backgroundColor: Colors.amber,
 //       ),
 //       drawer: DrawerWidget(),
 //         body:
 //            BlocBuilder<HomeBloc,HomeState>(builder: (context, state) {
 //             if(state is LoadedHomeState){
-//                   return 
+//                   return
 //               Column(
 //   children: [
 //     Expanded(
@@ -538,7 +517,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //             if(notification.servicenotif.content.toString().contains("new messages")==true){
 //     return Container();
 //             }else{
-//   return 
+//   return
 //   GestureDetector(
 //     onTap: () {
 //       print("gggggkkkllll");
@@ -549,15 +528,14 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //       service: notification.servicenotif,
 //       // indexx: index,
 //       // formattedDatee: formattedDate,
-//        formattedDatee: notification.date,                                                                                                                                                                                                                                                                                                                                                                                                        
+//        formattedDatee: notification.date,
 //       //notificationListt:notification.date,
-      
+
 //      // time: DateFormat('HH:mm:ss a').format(notification.date),
 // // اضافه کردن زمان
 //     ),
 //   ),
 // ));
-
 
 //    },
 //     child: Container(
@@ -579,7 +557,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                           height: 50,
 //                           width: 50,
 //                          ),
-                     
+
 //                     Expanded(
 //                         child: Text(notification.servicenotif.content,
 //                         maxLines: 1, // تعداد خطوط مورد نظر (در اینجا یک خط)
@@ -587,11 +565,11 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                       ),
 //                       ),
 //                        // Gap(200),
-                       
+
 //                        Row(
 //                         children: [
 //                   Text(notification.servicenotif.title),
-            
+
 //       //              Center(
 //       //   child: Text('Formatted Date: $formattedDate'),
 //       //  ),
@@ -605,7 +583,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //               ),
 //   );
 //             }
-            
+
 //           } else {
 //             return SizedBox(); // نوتیفیکیشن هایی که شروع به com.whatsapp نمی‌کنند، اینجا حذف می‌شوند
 //           }
@@ -614,7 +592,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //     ),
 //   ],
 // );
-            
+
 //             }
 //             return Container(height:  50,width: 50,color: Colors.amber,);
 //            },)
@@ -626,16 +604,6 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //     return DateFormat('HH:mm:ss a').format(date);
 //   }
 // }
-
-
-
-
-
-
-
-
-
-
 
 ///////////////////////////اخر درستهههههههه
 // import 'package:flutter/material.dart';
@@ -679,7 +647,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //       setState(() {
 //            if(rIndex == -1){
 //         notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
-        
+
 //           //formattedDate = formatDate(DateTime.now());
 //            }else{
 //             notificationListt[rIndex]..date = DateTime.now();
@@ -688,7 +656,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //            }
 //             notificationListt.sort((a, b) => b.date.compareTo(a.date));
 //       });
-      
+
 //     });
 //     //formattedDate = formatDate(DateTime.now());
 //   }
@@ -699,13 +667,13 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //       child: Scaffold(
 //           appBar: AppBar(
 //             title: Text("Notification history"),
-//             backgroundColor: Colors.amber, 
+//             backgroundColor: Colors.amber,
 //       ),
 //       drawer: DrawerWidget(),
 //         body:
 //            BlocBuilder<HomeBloc,HomeState>(builder: (context, state) {
 //             if(state is LoadedHomeState){
-//                   return 
+//                   return
 //               Column(
 //   children: [
 //     Expanded(
@@ -717,7 +685,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //             if(notification.servicenotif.content.toString().contains("new messages")==true){
 //     return Container();
 //             }else{
-//   return 
+//   return
 //   GestureDetector(
 //     onTap: () {
 //       print("gggggkkkllll");
@@ -729,15 +697,14 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //       // indexx: index,
 //       // formattedDatee: formattedDate,
 //        formattedDatee: notification.date,
-//        notificationListt: notificationListt,                                                                                                                                                                                                                                                                                                                                                                                                      
+//        notificationListt: notificationListt,
 //       //notificationListt:notification.date,
-      
+
 //      // time: DateFormat('HH:mm:ss a').format(notification.date),
 // // اضافه کردن زمان
 //     ),
 //   ),
 // ));
-
 
 //    },
 //     child: Container(
@@ -759,7 +726,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                           height: 50,
 //                           width: 50,
 //                          ),
-                     
+
 //                     Expanded(
 //                         child: Text(notification.servicenotif.content!,
 //                         maxLines: 1, // تعداد خطوط مورد نظر (در اینجا یک خط)
@@ -767,11 +734,11 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //                       ),
 //                       ),
 //                        // Gap(200),
-                       
+
 //                        Row(
 //                         children: [
 //                   Text(notification.servicenotif.title!),
-            
+
 //       //              Center(
 //       //   child: Text('Formatted Date: $formattedDate'),
 //       //  ),
@@ -785,7 +752,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //               ),
 //   );
 //             }
-            
+
 //           } else {
 //             return SizedBox(); // نوتیفیکیشن هایی که شروع به com.whatsapp نمی‌کنند، اینجا حذف می‌شوند
 //           }
@@ -794,7 +761,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
 //     ),
 //   ],
 // );
-            
+
 //             }
 //             return Container(height:  50,width: 50,color: Colors.amber,);
 //            },)

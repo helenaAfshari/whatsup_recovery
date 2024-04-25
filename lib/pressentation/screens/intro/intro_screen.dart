@@ -30,6 +30,16 @@ class _IntroScreenState extends State<IntroScreen> {
   bool isPermissionGranted = await NotificationListenerService.isPermissionGranted();
   return isPermissionGranted;
 }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.microtask(() => _checkPermission().then((granted) {
+      if(granted){
+ Navigator.pushReplacementNamed(context, ScreenNames.notificationHistoryScreen);
+      }
+    }));
+  }
 
   @override
   Widget build(BuildContext context) {

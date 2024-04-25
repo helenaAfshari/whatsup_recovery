@@ -1,4 +1,3 @@
-
 //قبل
 // import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
@@ -7,7 +6,7 @@
 
 // class DetailsNotificationHistoryList extends StatefulWidget {
 //        List? notificationListt = <NotifWithTimeModel>[];
-       
+
 //   final ServiceNotificationEvent? service;
 //   final int? indexx;
 //   final RoomModel? room;
@@ -29,14 +28,14 @@
 //   @override
 //   void initState() {
 //     super.initState();
-    
+
 //     // NotificationListenerService.notificationsStream.listen((event) {
 //     //   print("Curent notification: $event");
 //     //   setState(() {
 //     //     notificationListt.add(NotifWithTimeModel(DateTime.now(), event));
 //     //       //formattedDate = formatDate(DateTime.now());
 //     //   });
-      
+
 //     // });
 //     //formattedDate = formatDate(DateTime.now());
 //   }
@@ -71,7 +70,7 @@
 //           //         color: const Color.fromARGB(255, 181, 174, 155),
 //           //          child: Text(notificationListDetails[index].detailsText),
 //           //         //child: Text(notification.textUser),
-                  
+
 //           //       ),
 //           //     );
 //           //   },
@@ -91,9 +90,9 @@
 //                     Expanded(
 //                       child:
 //                   Text('${widget.service?.content ?? ""}'),
-                  
+
 //                     ),
-                   
+
 //                     // Padding(
 //                     //   padding: const EdgeInsets.only(top: 40),
 //                     //   child: Text("55"),
@@ -138,7 +137,7 @@
 //            // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
 // //             // Text('Formatted Date on Another Pagehhhhh: ${widget.formattedDatee}'),
 // //        Text('Formatted Date on Another Pagehhhhh: ${DateFormat('HH:mm:ss a').format(widget.formattedDatee)}'),
-        
+
 //         ],
 //       ),
 
@@ -147,9 +146,6 @@
 // }
 
 //////////قبل
-
-
-
 
 // class DetailsNotificationHistoryList extends StatefulWidget {
 //   final List<NotifWithTimeModel>? notificationListt;
@@ -202,17 +198,15 @@
 //   }
 // }
 
-
-
-   ///////////////////////درست
-      // body: room == null ? Text('room required') :  ListView.builder(
-      //   itemCount: room!.messages.length,
-      //   itemBuilder: (context, index) {
-      //   final msg = room!.messages[index];
-      //   return ListTile(
-      //     title: Text(msg.servicenotif.content ?? 'Withot content'),
-      //   );
-      // },),
+///////////////////////درست
+// body: room == null ? Text('room required') :  ListView.builder(
+//   itemCount: room!.messages.length,
+//   itemBuilder: (context, index) {
+//   final msg = room!.messages[index];
+//   return ListTile(
+//     title: Text(msg.servicenotif.content ?? 'Withot content'),
+//   );
+// },),
 ///////////////////////////////درست
 ///
 ///بعد
@@ -221,9 +215,8 @@ import 'package:intl/intl.dart';
 import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
 
 class DetailsNotificationHistoryList extends StatelessWidget {
-
   final RoomModel? room;
-  const DetailsNotificationHistoryList({super.key,required this.room});
+  const DetailsNotificationHistoryList({super.key, required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -271,139 +264,149 @@ class DetailsNotificationHistoryList extends StatelessWidget {
 //     },
 //   ),
 // ));
-   body: Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        fit: BoxFit.fill,
-        image: AssetImage("assets/images/background.png"),
-    ),
-    
-   ),
-   child: ListView.builder(
-     reverse: true, // اینجا برای معکوس کردن لیست استفاده می‌شود
-     itemCount:room?.messages.length ?? 0,
-     itemBuilder: (context, index) {
-      final reversedIndex = room!.messages.length - 1 - index; // معکوس کردن ایندکس
-       final notification = room!.messages[reversedIndex];
-       if (notification.servicenotif.packageName == "com.whatsapp" &&
-       !notification.servicenotif.content.toString().contains(RegExp(r'\d+ new message'))) {
-        return 
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   children: [
-        //     Card(
-        //       color: Colors.amber,
-        //       child: Stack(
-        //         children: [
-        //         Column(
-        //           children: [
-        //            Align(
-        //     alignment: Alignment.bottomRight,
-        //     child: Text(
-        //       notification.servicenotif.content.toString(),
-        //       overflow: TextOverflow.ellipsis,
-        //     ),
-        //     ),
-        //             Align(
-        //               alignment: Alignment.centerLeft,
-        //               child: Text(DateFormat('HH:mm:ss a').format(notification.date)))
-        //           ],
-        //         ),
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // );
-   
-      // Align(
-      //     alignment: Alignment.centerRight,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(left: 100,right: 10),
-      //       child: Row(
-      //         mainAxisAlignment: MainAxisAlignment.end,
-      //         children: [
-      //           Card(
-      //             color: Color.fromARGB(255, 209, 243, 226),
-      //             elevation: 8,
-      //           child: Column(
-      //             children: [
-      // Text(
-      // notification.servicenotif.content.toString(),
-      // style: TextStyle(
-      // fontSize: 16,
-      // fontWeight: FontWeight.bold,
-      // ),
-      // textAlign: TextAlign.center, // تنظیم متن در وسط
-      // ),
-      //                 // Text(DateFormat('HH:mm:ss a').format(notification.date)),
-      //             ],
-      //           ),
-      //           ),
-   
-   
-      //         ],
-      //       ),
-      //     ),
-      //   );
-   
-      Align(
-     alignment: Alignment.centerRight,
-     child: Padding(
-      padding: const EdgeInsets.only(left: 100, right: 10),
-      child: Card(
-        color: Color.fromARGB(255, 209, 243, 226),
-        elevation: 8,
-        child: IntrinsicWidth(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10,top: 8),
-                child: Text(
-                  notification.servicenotif.content.toString(),
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-             
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(
-                    DateFormat('HH:mm:ss a').format(notification.date),
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 5,)
-            ],
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage("assets/images/background.png"),
           ),
         ),
+        child: ListView.builder(
+            reverse: true, // اینجا برای معکوس کردن لیست استفاده می‌شود
+            itemCount: room?.messages.length,
+            itemBuilder: (context, index) {
+              final chat = room!.messages[index];
+return ListTile(
+  title: Text(chat.servicenotif.content ?? ''),
+);
+
+
+              final reversedIndex =
+                  room!.messages.length - 1 - index; // معکوس کردن ایندکس
+              final notification = room!.messages[reversedIndex];
+              if (notification.servicenotif.packageName == "com.whatsapp" &&
+                  !notification.servicenotif.content
+                      .toString()
+                      .contains(RegExp(r'\d+ new message'))) {
+                return
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     Card(
+                    //       color: Colors.amber,
+                    //       child: Stack(
+                    //         children: [
+                    //         Column(
+                    //           children: [
+                    //            Align(
+                    //     alignment: Alignment.bottomRight,
+                    //     child: Text(
+                    //       notification.servicenotif.content.toString(),
+                    //       overflow: TextOverflow.ellipsis,
+                    //     ),
+                    //     ),
+                    //             Align(
+                    //               alignment: Alignment.centerLeft,
+                    //               child: Text(DateFormat('HH:mm:ss a').format(notification.date)))
+                    //           ],
+                    //         ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // );
+
+                    // Align(
+                    //     alignment: Alignment.centerRight,
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.only(left: 100,right: 10),
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.end,
+                    //         children: [
+                    //           Card(
+                    //             color: Color.fromARGB(255, 209, 243, 226),
+                    //             elevation: 8,
+                    //           child: Column(
+                    //             children: [
+                    // Text(
+                    // notification.servicenotif.content.toString(),
+                    // style: TextStyle(
+                    // fontSize: 16,
+                    // fontWeight: FontWeight.bold,
+                    // ),
+                    // textAlign: TextAlign.center, // تنظیم متن در وسط
+                    // ),
+                    //                 // Text(DateFormat('HH:mm:ss a').format(notification.date)),
+                    //             ],
+                    //           ),
+                    //           ),
+
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   );
+
+                    Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 100, right: 10),
+                    child: Card(
+                      color: Color.fromARGB(255, 209, 243, 226),
+                      elevation: 8,
+                      child: IntrinsicWidth(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 8),
+                              child: Text(
+                                notification.servicenotif.content.toString(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  DateFormat('HH:mm:ss a')
+                                      .format(notification.date),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+                ////////////////درستتت
+                // Align(
+                //   alignment: Alignment.centerRight,
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(left: 100,right: 10),
+                //     child: Card(
+                //       color: Color.fromARGB(255, 209, 243, 226),
+                //       elevation: 8,
+                //     child: Text(notification.servicenotif.content.toString()),
+                //     ),
+                //   ),
+                // );
+              }
+            }),
       ),
-     ),
-   );
-      ////////////////درستتت
-        // Align(
-        //   alignment: Alignment.centerRight,
-        //   child: Padding(
-        //     padding: const EdgeInsets.only(left: 100,right: 10),
-        //     child: Card(
-        //       color: Color.fromARGB(255, 209, 243, 226),
-        //       elevation: 8,
-        //     child: Text(notification.servicenotif.content.toString()),
-        //     ),
-        //   ),
-        // );
-        }}
-        ),
-      ),
-      );
-  }}
+    );
+  }
+}
   ///درستتتتت
   ///
   ///
