@@ -680,7 +680,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+import 'package:notif/domain/model/service_whatsup_model.dart/service_whatsup_model.dart';
 
 class DetailsNotificationHistoryList extends StatelessWidget {
   final RoomModel? room;

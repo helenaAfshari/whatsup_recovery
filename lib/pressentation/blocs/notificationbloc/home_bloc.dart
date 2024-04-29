@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+import 'package:notif/domain/model/service_whatsup_model.dart/service_whatsup_model.dart';
 import 'package:notif/pressentation/blocs/notificationbloc/home_event.dart';
 import 'package:notif/pressentation/blocs/notificationbloc/home_state.dart';
 import 'package:notification_listener_service/notification_event.dart';

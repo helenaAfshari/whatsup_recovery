@@ -1,6 +1,6 @@
 
 import 'package:intl/intl.dart';
-import 'package:notif/domain/model/service_whatsup_model.dart/model.dart';
+import 'package:notif/domain/model/service_whatsup_model.dart/service_whatsup_model.dart';
 import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 
