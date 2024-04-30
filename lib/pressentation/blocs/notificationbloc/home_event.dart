@@ -6,13 +6,6 @@ abstract class HomeEvent{}
 class HomeStart extends HomeEvent{}
 class HomeLoadedEvent extends HomeEvent {
 
- // HomeLoadedEvent(this.index);
-  //HomeLoadedEvent(this.notificationListt);
- // List<ServiceNotificationEvent> notificationListt = <ServiceNotificationEvent>[];
-// int index;
-  // HomeLoadedEvent(this.notificationListt);
- //List<ServiceNotificationEvent>notificationListt = <ServiceNotificationEvent>[];
-
 }
 class GetPermisionEvent extends HomeEvent {
 

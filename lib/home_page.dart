@@ -27,47 +27,6 @@ class HomePage extends StatelessWidget {
 
         ],
       )
-
-//       ListView(children: [
-//         SizedBox(height: 50,),
-//         ElevatedButton(onPressed: () {
-//           smsControllerrrrr.requestForPermisionnnn();
-//         }, child: Text("ListenNotification")),
-// SizedBox(height: 20,),
-// // Text("AllNotification"),
-     
-
-// // Obx(() => Column(
-// //   children: smsControllerrrrr.notificationListt.value
-// //   .map((element) => Container(
-// //     padding: EdgeInsets.all(10),
-// //     margin: EdgeInsets.all(10),
-// //     color: Colors.deepPurple.withOpacity(0.2),
-// //     child: Column(
-// //       children: [
-// //         Row(
-// //           children: [
-// //            Text("${element.packageName.split("com")}"),
-// //         ],),
-// //           Row(
-// //           children: [
-// //            Text(element.content),
-// //         ],) ,
-// //          Row(
-// //           children: [
-// //          Text("lllll::::$formattedDateTime"),
-    
-// //           // print('Current date and time: $formattedDateTime'),
-// //         ],),
-    
-// //       ],
-// //     ),
-// //   ))
-// //   .toList(),
-// // )
-// //)
-
-//       ],),
     );
   }
 }

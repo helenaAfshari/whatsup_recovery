@@ -4,7 +4,9 @@ import 'package:notif/core/resource/constants/my_colors.dart';
 
 class MyTHeme {
   static ThemeData lightTheme() => ThemeData(
+ 
         textTheme: const TextTheme(
+      
           ///Title
           titleLarge: TextStyle(
             fontFamily: 'IranSans',

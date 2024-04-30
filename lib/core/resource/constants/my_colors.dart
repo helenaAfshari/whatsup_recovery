@@ -15,4 +15,7 @@ abstract class MyColors{
   static const Color percentMusicColor = Color(0xFFFFDEA4);
   static const Color tafsirTextColor = Colors.blue;
   static const Color circularProgressIndicatorColor = Colors.blue;
+  static const Color notificationHistoryTextColor = Color.fromARGB(255, 5, 171, 91);
+   static const Color backgroundAppBarColor = Color(0xFFFFFFFF);
+   static const Color backgroundStatuseBarColor = Color(0xFFFFFFFF);
 }
