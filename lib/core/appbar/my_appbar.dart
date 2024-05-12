@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:notif/core/resource/constants/my_colors.dart';
-import 'package:notif/core/resource/constants/my_dimensions.dart';
-import 'package:notif/core/resource/constants/theme/my_theme.dart';
+import 'package:WhatsUp/core/resource/constants/my_colors.dart';
+import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
+import 'package:WhatsUp/core/resource/constants/theme/my_theme.dart';
 class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBarWidget({
     this.title = '',

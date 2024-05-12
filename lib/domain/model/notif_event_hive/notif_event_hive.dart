@@ -86,11 +86,11 @@ class NotificationEventHive extends HiveObject{
     canReply = map['canReply'];
     haveExtraPicture = map['haveExtraPicture'];
     hasRemoved = map['hasRemoved'];
-    extrasPicture = map['notificationExtrasPicture'];
+    // extrasPicture = map['notificationExtrasPicture'];
     packageName = map['packageName'];
     title = map['title'];
-    appIcon = map['appIcon'];
-    largeIcon = map['largeIcon'];
+    // appIcon = map['appIcon'];
+    // largeIcon = map['largeIcon'];
     content = map['content'];
   }
 
@@ -135,4 +135,33 @@ class NotificationEventHive extends HiveObject{
         content: eventPure.content,
       );
   }
+
+
+  // static NotificationEventHive fromMap( Map<String, dynamic> data) {
+  //   return NotificationEventHive(
+  //       id: data['id'],
+  //       canReply: data['canReply'],
+  //       haveExtraPicture: data['haveExtraPicture'],
+  //       hasRemoved: data['hasRemoved'],
+  //       extrasPicture: data['extrasPicture'],
+  //       packageName: data['packageName'],
+  //       title: data['title'],
+  //       appIcon: data['appIcon'],
+  //       largeIcon: data['largeIcon'],
+  //       content: data['content'],
+  //     );
+  // }
+
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'canReply': canReply,
+        'haveExtraPicture': haveExtraPicture,
+        'hasRemoved': hasRemoved,
+        'extrasPicture': extrasPicture,
+        'packageName': packageName,
+        'title': title,
+        'appIcon': appIcon,
+        'largeIcon': largeIcon,
+        'content': content,
+  };
 }

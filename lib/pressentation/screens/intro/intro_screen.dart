@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:notif/core/resource/constants/my_strings.dart';
-import 'package:notif/pressentation/blocs/intro/intro_bloc.dart';
-import 'package:notif/pressentation/blocs/intro/intro_event.dart';
-import 'package:notif/pressentation/blocs/intro/intro_state.dart';
-import 'package:notif/pressentation/route/screen_names.dart';
+import 'package:lottie/lottie.dart';
+import 'package:WhatsUp/core/resource/constants/my_strings.dart';
+import 'package:WhatsUp/pressentation/blocs/intro/intro_bloc.dart';
+import 'package:WhatsUp/pressentation/blocs/intro/intro_event.dart';
+import 'package:WhatsUp/pressentation/blocs/intro/intro_state.dart';
+import 'package:WhatsUp/pressentation/route/screen_names.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -35,8 +35,6 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
-bool permissionShown = false;
-
  return BlocProvider<IntroBloc>(
     create: (context) => IntroBloc()..add(IntroLoadedEvent()), // BlocProvider اینجا قرار می‌گیرد
     child: Scaffold(
@@ -51,28 +49,29 @@ bool permissionShown = false;
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Gap(50),
-          Image.asset('assets/images/smartphone.png'),
-           const SizedBox(height: 20),
+                   Lottie.asset('assets/lottie/permission.json'),
+        
                   // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
                   const Text(MyStrings.hello,style: TextStyle(color: Colors.white),),
                    const SizedBox(height: 20),
                   // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
-                  const Text(MyStrings.whatsUpRecovery,style: TextStyle(color: Colors.white),),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: const Text(MyStrings.whatsUpRecovery,style: TextStyle(color: Colors.white),),
+                  ),
+              const SizedBox(height: 20),
+
              ElevatedButton(
   onPressed: () {
 
     // ارسال درخواست permission از طریق Bloc
     BlocProvider.of<IntroBloc>(context).add(AddPermisionEvent(state.f,));
-   //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NotificationHistory()));
    Navigator.pushReplacementNamed(context, ScreenNames.notificationHistoryScreen);
 
-   
   },
   child: Text('Enable'),
 ),
-
-                 
+       
                 ],
               ),
             );

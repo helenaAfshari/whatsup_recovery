@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:notif/core/resource/constants/my_dimensions.dart';
+import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
 
 class MyPaddings {
   static const loginPadding = EdgeInsets.symmetric(

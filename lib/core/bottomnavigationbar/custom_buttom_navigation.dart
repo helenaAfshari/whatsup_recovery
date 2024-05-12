@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:notif/core/resource/constants/my_colors.dart';
+import 'package:WhatsUp/core/resource/constants/my_colors.dart';
 class CustomBottomNavigation extends StatefulWidget {
   const CustomBottomNavigation({super.key});
   @override

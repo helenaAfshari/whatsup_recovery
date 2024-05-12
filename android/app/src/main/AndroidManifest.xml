@@ -1,15 +1,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-package="com.vada.whastup">
+package="com.devgroup.whatsup">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 <uses-permission android:name="android.permission.WAKE_LOCK" />
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+<uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
     
 
     <application
-        android:label="notif"
+        android:label="WhatsUp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        
+        <service
+            android:name="id.flutter.flutter_background_service.BackgroundService"
+            android:foregroundServiceType="dataSync"
+        />
         <service android:label="notifications" android:name="notification.listener.service.NotificationListener"
 android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" android:exported="true">
         <intent-filter>
@@ -42,6 +48,7 @@ android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" andro
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
 
 </manifest>

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:notif/sms_controller.dart';
+import 'package:WhatsUp/sms_controller.dart';
 import 'package:intl/intl.dart';
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);

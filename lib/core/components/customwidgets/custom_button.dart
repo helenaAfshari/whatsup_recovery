@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:notif/core/resource/constants/my_pading.dart';
+import 'package:WhatsUp/core/resource/constants/my_pading.dart';
 
 // ignore: must_be_immutable
 class CustomButtonWidget extends StatelessWidget {

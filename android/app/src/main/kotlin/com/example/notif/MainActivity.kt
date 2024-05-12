@@ -1,4 +1,4 @@
-package com.example.notif
+package com.devgroup.whatsup
 
 import io.flutter.embedding.android.FlutterActivity
 

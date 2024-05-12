@@ -1,7 +1,7 @@
 
 import 'package:dio/dio.dart';
-import 'package:notif/core/network/api_provider.dart';
-import 'package:notif/service_locator.dart';
+import 'package:WhatsUp/core/network/api_provider.dart';
+import 'package:WhatsUp/service_locator.dart';
 
 class ApiProviderImp extends ApiProvider {
   @override
