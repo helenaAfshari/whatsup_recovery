@@ -1,4 +1,6 @@
 
+import 'package:WhatsUp/core/resource/constants/my_colors.dart';
+import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -38,7 +40,7 @@ class _IntroScreenState extends State<IntroScreen> {
  return BlocProvider<IntroBloc>(
     create: (context) => IntroBloc()..add(IntroLoadedEvent()), // BlocProvider اینجا قرار می‌گیرد
     child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 2, 56, 30),
+        backgroundColor: MyColors.backgroundIntroColor,
       body: BlocBuilder<IntroBloc, IntroState>(
         builder: (context, state) {
           if (state is LoadingIntroState) {
@@ -50,20 +52,18 @@ class _IntroScreenState extends State<IntroScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                    Lottie.asset('assets/lottie/permission.json'),
-        
                   // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
                   const Text(MyStrings.hello,style: TextStyle(color: Colors.white),),
-                   const SizedBox(height: 20),
+                    SizedBox(height: MyDimensions.semiLarge-4),
                   // محتوای اصلی صفحه در اینجا نمایش داده می‌شود
                   Padding(
-                    padding: const EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: MyDimensions.light+2),
                     child: const Text(MyStrings.whatsUpRecovery,style: TextStyle(color: Colors.white),),
                   ),
-              const SizedBox(height: 20),
+               SizedBox(height: MyDimensions.semiLarge-4),
 
              ElevatedButton(
   onPressed: () {
-
     // ارسال درخواست permission از طریق Bloc
     BlocProvider.of<IntroBloc>(context).add(AddPermisionEvent(state.f,));
    Navigator.pushReplacementNamed(context, ScreenNames.notificationHistoryScreen);

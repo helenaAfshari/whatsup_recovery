@@ -50,7 +50,20 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
+    signingConfigs {
+        release {
+            keyAlias 'developer1400'
+            keyPassword 'developer1400'
+            storeFile file('D:/hanna/gitlab/whatsup_recovery/android/app/whatsuprecovery.jks') // Path to your key.jks file
+            storePassword 'developer1400'
+        }
+        debug {
+            keyAlias 'developer1400'
+            keyPassword 'developer1400'
+            storeFile file('D:/hanna/gitlab/whatsup_recovery/android/app/whatsuprecovery.jks') // Path to your key.jks file
+            storePassword 'developer1400'
+        }
+    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

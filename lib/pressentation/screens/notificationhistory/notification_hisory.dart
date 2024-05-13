@@ -1,79 +1,25 @@
-import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 import 'dart:ui';
-import 'package:device_info_plus/device_info_plus.dart';
+import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:WhatsUp/core/resource/constants/my_colors.dart';
 import 'package:WhatsUp/core/resource/constants/my_strings.dart';
 import 'package:WhatsUp/domain/model/notif_event_hive/notif_event_hive.dart';
 import 'package:WhatsUp/domain/model/service_whatsup_model.dart/service_whatsup_model.dart';
-import 'package:WhatsUp/main.dart';
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_bloc.dart';
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_event.dart';
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_state.dart';
 import 'package:WhatsUp/pressentation/screens/notificationhistory/details_notification_history_list.dart';
-import 'package:notification_listener_service/notification_event.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart';
-
-//  final rrrrooooms =  RoomModel(
-//  name: "lll",
-//  date: DateTime.now(),
-//  lastMsg: NotifWithTimeModel(DateTime.now(), NotificationEventHive()),
-//  messages: []);
 
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) async {
-  // Only available for flutter 3.0.0 and later
-  // DartPluginRegistrant.ensureInitialized();
-
-  // For flutter prior to version 3.0.0
-  // We have to register the plugin manually
-
-  // SharedPreferences preferences = await SharedPreferences.getInstance();
-  // await preferences.setString("hello", "world");
-
-  /// OPTIONAL when use custom notification
-//   if (service is AndroidServiceInstance) {
-//     service!.on('setAsForeground').listen((event) {
-//       service!.setAsForegroundService();
-//     });
-
-//     service.on('setAsBackground').listen((event) {
-//       service.setAsBackgroundService();
-//     });
-//   }
-
-//   service!.on('stopService').listen((event) {
-//     service!.stopSelf();
-//   });
-
-//   if (service is AndroidServiceInstance) {
-// service!.setForegroundNotificationInfo(
-//       title: "App in background...",
-//       content: "gggg",
-//     );
-//   }
-
-  //bring to foreground
-//   Timer.periodic(const Duration(seconds: 10), (timer) async {
-//   if (service is AndroidServiceInstance) {
-// service.setForegroundNotificationInfo(
-//       title: "App in background...",
-//       content: "Update ${DateTime.now()}",
-//     );
-//   }
 
   final List<RoomModel> rooms = [];
 
@@ -87,8 +33,6 @@ void onStart(ServiceInstance service) async {
       rooms.add(RoomModel.fromJson(jsonDecode(roomStr) as Map<String, dynamic>));
     }
   }
-
-
 
   NotificationListenerService.notificationsStream.listen((eventPure) async {
     //برای تبدیل اون کلاسی که میخواییم استفاده میشه  fromEntity
@@ -164,6 +108,7 @@ void onStart(ServiceInstance service) async {
   });
 }
 
+
 class NotificationHistory extends StatefulWidget {
   const NotificationHistory({super.key});
 
@@ -182,7 +127,6 @@ class _NotificationHistoryState extends State<NotificationHistory> {
   void initState() {
     super.initState();
     //اولویت قرار بگیره sort
-
     SharedPreferences.getInstance().then((value) async {
       preferences = value;
 
@@ -208,18 +152,6 @@ class _NotificationHistoryState extends State<NotificationHistory> {
           rooms[index] = room;
         }
       }
-
-
-      //    //برای تبدیل اون کلاسی که میخواییم استفاده میشه  fromEntity
-      // final NotificationEventHive event =
-      //     NotificationEventHive.fromEntity(eventPure);
-
-      //  //برای تبدیل اون کلاسی که میخواییم استفاده میشه  fromEntity
-      // final NotificationEventHive event =
-      //     NotificationEventHive.fromEntity(eventPure);
-
-      // FlutterBackgroundService().invoke(event.title.toString());
-
         setState(() {});
       rooms.sort((a, b) => b.date.compareTo(a.date));
     });
@@ -251,20 +183,24 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                     Icons.more_vert_outlined,
                     color: MyColors.primaryButtonColor,
                   ),
-
+                  
                   offset: Offset(0, 56),
                   //padding: EdgeInsets.symmetric(vertical: 20),
-                  iconSize: 28,
+                  iconSize: MyDimensions.large-4,
                   itemBuilder: (context) => [
                     PopupMenuItem(
-                        child: GestureDetector(
+                        child: Container(
+                     height: MyDimensions.large+3,
+                          width:MyDimensions.xxlarge-100,
+                          child: GestureDetector(
                             onTap: () async {
                               if (await canLaunchUrl(
                                   Uri.parse(MyStrings.support))) {
                                 await launchUrl(Uri.parse(MyStrings.support));
                               }
                             },
-                            child: Text("پشتیبانی ")))
+                            child: Text("پشتیبانی ")),
+                        ))
                   ],
                 ),
               ],
@@ -272,7 +208,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                 MyStrings.notificationHistory,
                 style: TextStyle(
                     color: MyColors.notificationHistoryTextColor,
-                    fontSize: 15,
+                    fontSize: MyDimensions.medium,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -283,85 +219,9 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                     color: Colors.blue,
                   );
                 }
-
                 if (state is LoadedHomeState) {
                   return Column(
-                    children: [
-                      //FlutterBackgroundService().invoke("setAsBackground");
-                      ElevatedButton(
-                        child: const Text("Background Mode"),
-                        onPressed: () {
-                          FlutterBackgroundService().invoke("setAsBackground");
-                        },
-                      ),
-
-                      //    StreamBuilder<Map<String, dynamic>?>(
-                      //   stream: FlutterBackgroundService().on('update'),
-                      //   builder: (context, snapshot) {
-                      //     if (!snapshot.hasData) {
-                      //       return const Center(
-                      //         child: CircularProgressIndicator(),
-                      //       );
-                      //     }
-
-                      //     final data = snapshot.data!;
-                      //     String? device = data["device"];
-                      //     DateTime? date = DateTime.tryParse(data["current_date"]);
-                      //     return Column(
-                      //       children: [
-                      //         Text(device ?? 'Unknown'),
-                      //         Text(date.toString()),
-                      //       ],
-                      //     );
-                      //   },
-                      // ),
-                      // ElevatedButton(
-                      //   child: const Text("Foreground Mode"),
-                      //   onPressed: () {
-                      //     FlutterBackgroundService().invoke("setAsForeground");
-                      //   },
-                      // ),
-
-                      //   ElevatedButton(
-                      //   child: const Text("Background Mode"),
-                      //   onPressed: () {
-                      //     FlutterBackgroundService().invoke("setAsBackground");
-                      //   },
-                      // ),
-
-                      //              ElevatedButton(
-                      //   child: Text(text),
-                      //   onPressed: () async {
-                      //     final service = FlutterBackgroundService();
-                      //     var isRunning = await service.isRunning();
-
-                      //     if (isRunning) {
-                      //       service.invoke("stopService");
-                      //     } else {
-                      //       service.startService();
-                      //     }
-
-                      //     if (!isRunning) {
-                      //       text = 'Stop Service';
-                      //     } else {
-                      //       text = 'Start Service';
-                      //     }
-                      //     setState(() {});
-                      //   },
-                      // ),
-
-                      // ElevatedButton(
-                      //         child: const Text("Background Mode"),
-                      //         onPressed: () {
-                      //           FlutterBackgroundService().invoke("setAsBackground");
-                      //         },
-                      //       ),
-                      //   ElevatedButton(
-                      //   child: const Text("Foreground Mode"),
-                      //   onPressed: () {
-                      //     FlutterBackgroundService().invoke("jjjjjj");
-                      //   },
-                      // ),
+                    children: [                  
                       Expanded(
                         child: ListView.builder(
                           itemCount: rooms.length,
@@ -379,16 +239,16 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                                         )));
                               },
                               child: Container(
-                                height: 75,
-                                width: 200,
-                                padding: EdgeInsets.all(10),
-                                margin: EdgeInsets.all(10),
+                                height: MyDimensions.xlarge+35,
+                                width: MyDimensions.xxlarge,
+                                padding: EdgeInsets.all(MyDimensions.light+2),
+                                margin: EdgeInsets.all(MyDimensions.light+2),
                                 color: Colors.white,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      decoration: const BoxDecoration(
+                                      decoration:  BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
                                               'assets/images/user_profile.png'), // نمایش تصویر
@@ -396,62 +256,17 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                                               .cover, // تنظیم حالت نمایش تصویر
                                         ),
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(50)),
+                                            Radius.circular(MyDimensions.xlarge+10)),
                                       ),
-                                      height: 50,
-                                      width: 50,
+                                      height: MyDimensions.xlarge+10,
+                                      width: MyDimensions.xlarge+10,
                                     ),
-                                    SizedBox(width: 10),
+                                    SizedBox(width: MyDimensions.light+2),
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          //   StreamBuilder<Map<String, dynamic>?>(
-                                          //   stream: FlutterBackgroundService().on('update'),
-                                          //  builder: (context, snapshot) {
-                                          //     if (!snapshot.hasData) {
-                                          //       return const Center(
-                                          //         child: CircularProgressIndicator(),
-                                          //       );
-                                          //     }
-
-                                          //     final data = snapshot.data!;
-                                          //     String? device = data["device"];
-                                          //     DateTime? date = DateTime.tryParse(data["current_date"]);
-                                          //     return Column(
-                                          //       children: [
-                                          //         Text(device ?? 'Unknown'),
-                                          //         Text(date.toString()),
-                                          //       ],
-                                          //     );
-                                          //   },
-                                          // ),
-
-//      StreamBuilder<Map<String, dynamic>?>(
-//   stream: FlutterBackgroundService().on('update'),
-//   builder: (context, snapshot) {
-//     // if (!snapshot.hasData) {
-//     //   return const Center(
-//     //     child: CircularProgressIndicator(),
-//     //   );
-//     // }
-
-//     final data = snapshot.data!;
-//     String? device = data["device"];
-//     //String? title = room.lastMsg.servicenotif.content!;
-//     DateTime? date = DateTime.tryParse(data["current_date"]);
-//     return Column(
-//       children: [
-//         Text(device ?? 'Unknown'),
-//         Text(date.toString()),
-//         // Text(date.toString()),
-//         // Text( room.lastMsg.servicenotif
-//         //                               .content!,),
-//       ],
-//     );
-//   },
-// ),
                                           Text(
                                             room.lastMsg.servicenotif.title!,
                                             maxLines: 1,
@@ -474,17 +289,12 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                           },
                         ),
                       ),
-
-                      // ElevatedButton(
-                      // onPressed: () {
-                      //   FlutterBackgroundService().invoke("setBackgroundService");
-                      // }, child: Text("background")),
                     ],
                   );
                 }
                 return Container(
-                  height: 50,
-                  width: 50,
+                  height: MyDimensions.xlarge+10,
+                  width: MyDimensions.xlarge+10,
                   color: Colors.amber,
                 );
               },
@@ -499,27 +309,3 @@ class _NotificationHistoryState extends State<NotificationHistory> {
     return DateFormat('HH:mm:ss a').format(date);
   }
 }
-// @pragma('vm:entry-point')
-// void onStart(ServiceInstance service)async{
-//   if(service is AndroidServiceInstance){
-//     service.on('setAsForground').listen((event) {
-//       service.setAsForegroundService();
-//     });
-//     service.on('setAsBackground').listen((event) {
-//       service.setAsBackgroundService();
-//     });
-//     service.on('stopService').listen((event) {
-//       service.stopSelf();
-//     });
-//     Timer.periodic(Duration(seconds: 2), (timer) async {
-//      if(service is AndroidServiceInstance){
-//       if(await service.isForegroundService()){
-//         service.setForegroundNotificationInfo(
-//         title: ,
-//         content: "Updated ${DateTime.now()}");
-//       }
-//      }
-
-//     });
-//   }
-// }

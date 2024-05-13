@@ -1,4 +1,5 @@
 
+import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:WhatsUp/sms_controller.dart';
 import 'package:intl/intl.dart';
@@ -15,17 +16,17 @@ class HomePageScreen extends StatelessWidget {
         backgroundColor: Colors.deepPurple,
       ),
       body: ListView(children: [
-        SizedBox(height: 50,),
+        SizedBox(height: MyDimensions.xlarge+10,),
         ElevatedButton(onPressed: () {
           //smsControllerrrrr.requestForPermisionnnn();
         }, child: Text("ListenNotification")),
-SizedBox(height: 20,),
+SizedBox(height: MyDimensions.semiLarge-4,),
 Text("AllNotification"),
  Column(
  children: [
    Container(
-    padding: EdgeInsets.all(10),
-    margin: EdgeInsets.all(10),
+    padding: EdgeInsets.all(MyDimensions.light+2),
+    margin: EdgeInsets.all(MyDimensions.light+2),
     color: Colors.deepPurple.withOpacity(0.2),
     child: Column(
       children: [

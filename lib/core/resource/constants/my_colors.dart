@@ -18,4 +18,8 @@ abstract class MyColors{
   static const Color notificationHistoryTextColor = Color.fromARGB(255, 5, 171, 91);
    static const Color backgroundAppBarColor = Color(0xFFFFFFFF);
    static const Color backgroundStatuseBarColor = Color(0xFFFFFFFF);
+   static const Color backgroundColor = Color(0xFFFFFFFF);
+   static const Color backgroundTextChatColor = Color.fromARGB(255, 209, 243, 226);
+   static const Color backgroundIntroColor = Color.fromARGB(255, 2, 56, 30);
+
 }
