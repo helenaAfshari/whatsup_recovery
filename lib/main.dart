@@ -2,6 +2,9 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:WhatsUp/pressentation/screens/notificationhistory/notification_hisory.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -12,10 +15,18 @@ import 'package:WhatsUp/domain/model/service_whatsup_model.dart/service_whatsup_
 import 'package:WhatsUp/pressentation/route/routes.dart';
 import 'package:WhatsUp/pressentation/route/screen_names.dart';
 import 'package:path_provider/path_provider.dart';
+import 'firebase_options.dart';
+
 String roomBox =  'room_box';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+      SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   //  await initializeService();
   // Hive.initFlutter();
 
@@ -29,7 +40,8 @@ Future<void> main() async {
     ..registerAdapter(RoomModelAdapter());
     
   await Hive.openBox<RoomModel>(roomBox);
-
+  // Pass all uncaught "fatal" errors from the framework to Crashlytics
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   runApp(MyApp());
 }

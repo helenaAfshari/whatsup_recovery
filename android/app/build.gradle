@@ -22,6 +22,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace "com.devgroup.whatsup"
     compileSdkVersion 34
@@ -49,21 +55,18 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
-    signingConfigs {
+
+   signingConfigs {
         release {
-            keyAlias 'developer1400'
-            keyPassword 'developer1400'
-            storeFile file('D:/hanna/gitlab/whatsup_recovery/android/app/whatsuprecovery.jks') // Path to your key.jks file
-            storePassword 'developer1400'
-        }
-        debug {
-            keyAlias 'developer1400'
-            keyPassword 'developer1400'
-            storeFile file('D:/hanna/gitlab/whatsup_recovery/android/app/whatsuprecovery.jks') // Path to your key.jks file
-            storePassword 'developer1400'
+           keyAlias keystoreProperties['keyAlias']
+           keyPassword keystoreProperties['keyPassword']
+           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+           storePassword keystoreProperties['storePassword']
         }
     }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

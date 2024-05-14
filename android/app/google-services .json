@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505226299078",
+    "project_id": "whatsup-d8bac",
+    "storage_bucket": "whatsup-d8bac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505226299078:android:ac3a2ff3eb874c68bbb9c7",
+        "android_client_info": {
+          "package_name": "com.devgroup.whatsup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505226299078-igaulh8loh9at88619sd8fc5jpt64bgv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfYCdOxLF0PA9suExF11tYEizXZNZ_gPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505226299078-igaulh8loh9at88619sd8fc5jpt64bgv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
