@@ -1,7 +1,7 @@
 
 import 'dart:io';
 import 'dart:async';
-import 'package:WhatsUp/pressentation/screens/notificationhistory/notification_hisory.dart';
+import 'package:WhatsUp/screens/notificationhistory/notification_hisory.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';

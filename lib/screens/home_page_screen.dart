@@ -1,7 +1,6 @@
 
 import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:WhatsUp/sms_controller.dart';
 import 'package:intl/intl.dart';
 class HomePageScreen extends StatelessWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -18,7 +17,6 @@ class HomePageScreen extends StatelessWidget {
       body: ListView(children: [
         SizedBox(height: MyDimensions.xlarge+10,),
         ElevatedButton(onPressed: () {
-          //smsControllerrrrr.requestForPermisionnnn();
         }, child: Text("ListenNotification")),
 SizedBox(height: MyDimensions.semiLarge-4,),
 Text("AllNotification"),
@@ -32,7 +30,6 @@ Text("AllNotification"),
       children: [
         Row(
           children: [
-          // Text("${element.packageName.split("com")}"),
         ],),
           Row(
           children: [
@@ -42,7 +39,6 @@ Text("AllNotification"),
           children: [
          Text("lllll::::$formattedDateTime"),
     
-          // print('Current date and time: $formattedDateTime'),
         ],),
     
       ],

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
+import 'package:WhatsUp/screens/notificationhistory/details_notification_history_list.dart';
+import 'package:WhatsUp/screens/widgets/checked_vpn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
@@ -13,10 +15,10 @@ import 'package:WhatsUp/domain/model/service_whatsup_model.dart/service_whatsup_
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_bloc.dart';
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_event.dart';
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_state.dart';
-import 'package:WhatsUp/pressentation/screens/notificationhistory/details_notification_history_list.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vpn_connection_detector/vpn_connection_detector.dart';
 
 @pragma('vm:entry-point')
 void onStart(ServiceInstance service) async {
@@ -27,7 +29,6 @@ void onStart(ServiceInstance service) async {
 
   List<String>? roomsStr = await preferences.getStringList('rooms');
 
-//اینجا اگر داخل  فور نزاریم لیست رو نمایش نمیده 
   if (roomsStr != null) {
     for (var roomStr in roomsStr) {
       rooms.add(RoomModel.fromJson(jsonDecode(roomStr) as Map<String, dynamic>));
@@ -35,7 +36,6 @@ void onStart(ServiceInstance service) async {
   }
 
   NotificationListenerService.notificationsStream.listen((eventPure) async {
-    //برای تبدیل اون کلاسی که میخواییم استفاده میشه  fromEntity
     final NotificationEventHive event =
         NotificationEventHive.fromEntity(eventPure);
 
@@ -74,13 +74,6 @@ void onStart(ServiceInstance service) async {
         'room': room.toJson()
       },
     );
-      // box
-      //     .add(room)
-      //     .then((value) => print('new room saved successfully'))
-      //     .catchError(print);
-
-      // FlutterBackgroundService().invoke("تتتتت");
-      //  print("jhyunhgfdd${a}");
     } else {
       if (rooms[rIndex].messages.isNotEmpty &&
           rooms[rIndex].lastMsg.servicenotif.content ==
@@ -105,10 +98,9 @@ void onStart(ServiceInstance service) async {
       },
     );
     }
+    
   });
 }
-
-
 class NotificationHistory extends StatefulWidget {
   const NotificationHistory({super.key});
 
@@ -119,19 +111,17 @@ class NotificationHistory extends StatefulWidget {
 class _NotificationHistoryState extends State<NotificationHistory> {
   final service = FlutterBackgroundService();
   String formattedDate = '';
-
+  final stream = VpnConnectionDetector();
   late final SharedPreferences preferences;
   final rooms = <RoomModel>[];
-
+  
   @override
   void initState() {
     super.initState();
-    //اولویت قرار بگیره sort
     SharedPreferences.getInstance().then((value) async {
       preferences = value;
 
       List<String>? roomsStr = await preferences.getStringList('rooms');
-
       if (roomsStr != null) {
         for (var roomStr in roomsStr) {
           rooms.add(
@@ -152,19 +142,17 @@ class _NotificationHistoryState extends State<NotificationHistory> {
           rooms[index] = room;
         }
       }
-        setState(() {});
+      setState(() {});
       rooms.sort((a, b) => b.date.compareTo(a.date));
     });
-
-    // rooms
-    //   ..addAll(box.values)
-    //   ..sort((a, b) => b.date.compareTo(a.date));
   }
 
+@override
+  void dispose() {
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
-    String text = "Stop Service";
-
     return BlocProvider(
       create: (context) => HomeBloc()..add(HomeLoadedEvent()),
       child: SafeArea(
@@ -183,45 +171,46 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                     Icons.more_vert_outlined,
                     color: MyColors.primaryButtonColor,
                   ),
-                  
                   offset: Offset(0, 56),
-                  //padding: EdgeInsets.symmetric(vertical: 20),
-                  iconSize: MyDimensions.large-4,
+                  iconSize: MyDimensions.large - 4,
                   itemBuilder: (context) => [
                     PopupMenuItem(
-                        child: Container(
-                     height: MyDimensions.large+3,
-                          width:MyDimensions.xxlarge-100,
-                          child: GestureDetector(
-                            onTap: () async {
-                              if (await canLaunchUrl(
-                                  Uri.parse(MyStrings.support))) {
-                                await launchUrl(Uri.parse(MyStrings.support));
-                              }
-                            },
-                            child: Text("پشتیبانی ")),
-                        ))
+                      child: Container(
+                        height: MyDimensions.large + 3,
+                        width: MyDimensions.xxlarge - 100,
+                        child: GestureDetector(
+                          onTap: () async {
+                            if (await canLaunchUrl(
+                                Uri.parse(MyStrings.support))) {
+                              await launchUrl(Uri.parse(MyStrings.support));
+                            }
+                          },
+                          child: Text(MyStrings.supportText),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ],
               title: Text(
                 MyStrings.notificationHistory,
                 style: TextStyle(
-                    color: MyColors.notificationHistoryTextColor,
-                    fontSize: MyDimensions.medium,
-                    fontWeight: FontWeight.bold),
+                  color: MyColors.notificationHistoryTextColor,
+                  fontSize: MyDimensions.medium,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             body: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
                 if (state is LoadingHomeState) {
-                  CircularProgressIndicator(
+                  return CircularProgressIndicator(
                     color: Colors.blue,
                   );
                 }
                 if (state is LoadedHomeState) {
                   return Column(
-                    children: [                  
+                    children: [
                       Expanded(
                         child: ListView.builder(
                           itemCount: rooms.length,
@@ -229,7 +218,6 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                             final room = rooms.elementAt(index);
                             return GestureDetector(
                               onTap: () {
-                                print("gggggkkkllll");
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => BlocProvider(
                                           create: (context) => HomeBloc(),
@@ -239,29 +227,29 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                                         )));
                               },
                               child: Container(
-                                height: MyDimensions.xlarge+35,
+                                height: MyDimensions.xlarge + 35,
                                 width: MyDimensions.xxlarge,
-                                padding: EdgeInsets.all(MyDimensions.light+2),
-                                margin: EdgeInsets.all(MyDimensions.light+2),
+                                padding: EdgeInsets.all(MyDimensions.light + 2),
+                                margin: EdgeInsets.all(MyDimensions.light + 2),
                                 color: Colors.white,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      decoration:  BoxDecoration(
+                                      decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
-                                              'assets/images/user_profile.png'), // نمایش تصویر
-                                          fit: BoxFit
-                                              .cover, // تنظیم حالت نمایش تصویر
+                                              'assets/images/user_profile.png'),
+                                          fit: BoxFit.cover,
                                         ),
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(MyDimensions.xlarge+10)),
+                                            Radius.circular(
+                                                MyDimensions.xlarge + 10)),
                                       ),
-                                      height: MyDimensions.xlarge+10,
-                                      width: MyDimensions.xlarge+10,
+                                      height: MyDimensions.xlarge + 10,
+                                      width: MyDimensions.xlarge + 10,
                                     ),
-                                    SizedBox(width: MyDimensions.light+2),
+                                    SizedBox(width: MyDimensions.light + 2),
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment:
@@ -289,12 +277,13 @@ class _NotificationHistoryState extends State<NotificationHistory> {
                           },
                         ),
                       ),
+                      CheckedVpn(),
                     ],
                   );
                 }
                 return Container(
-                  height: MyDimensions.xlarge+10,
-                  width: MyDimensions.xlarge+10,
+                  height: MyDimensions.xlarge + 10,
+                  width: MyDimensions.xlarge + 10,
                   color: Colors.amber,
                 );
               },
@@ -309,3 +298,5 @@ class _NotificationHistoryState extends State<NotificationHistory> {
     return DateFormat('HH:mm:ss a').format(date);
   }
 }
+
+

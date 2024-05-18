@@ -61,6 +61,8 @@ dependencies:
   shared_preferences: ^2.2.3
   firebase_analytics: ^10.8.0
   firebase_crashlytics: ^3.4.9
+  vpn_connection_detector: ^1.0.6
+  
 dev_dependencies:
   build_runner: ^2.4.9
   flutter_test:
