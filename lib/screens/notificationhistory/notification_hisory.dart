@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:WhatsUp/core/resource/constants/my_dimensions.dart';
 import 'package:WhatsUp/screens/notificationhistory/details_notification_history_list.dart';
+import 'package:WhatsUp/screens/widgets/appbar_custom_widget.dart';
 import 'package:WhatsUp/screens/widgets/checked_vpn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,6 @@ import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_histor
 import 'package:WhatsUp/pressentation/blocs/notificationbloc/notification_history_state.dart';
 import 'package:notification_listener_service/notification_listener_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:vpn_connection_detector/vpn_connection_detector.dart';
 
 @pragma('vm:entry-point')
@@ -153,6 +153,7 @@ class _NotificationHistoryState extends State<NotificationHistory> {
   }
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) => HomeBloc()..add(HomeLoadedEvent()),
       child: SafeArea(
@@ -162,45 +163,14 @@ class _NotificationHistoryState extends State<NotificationHistory> {
             statusBarIconBrightness: Brightness.dark,
           ),
           child: Scaffold(
-            backgroundColor: MyColors.backgroundAppBarColor,
-            appBar: AppBar(
-              backgroundColor: MyColors.backgroundAppBarColor,
-              actions: [
-                PopupMenuButton(
-                  icon: Icon(
-                    Icons.more_vert_outlined,
-                    color: MyColors.primaryButtonColor,
-                  ),
-                  offset: Offset(0, 56),
-                  iconSize: MyDimensions.large - 4,
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: Container(
-                        height: MyDimensions.large + 3,
-                        width: MyDimensions.xxlarge - 100,
-                        child: GestureDetector(
-                          onTap: () async {
-                            if (await canLaunchUrl(
-                                Uri.parse(MyStrings.support))) {
-                              await launchUrl(Uri.parse(MyStrings.support));
-                            }
-                          },
-                          child: Text(MyStrings.supportText),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ],
-              title: Text(
-                MyStrings.notificationHistory,
-                style: TextStyle(
-                  color: MyColors.notificationHistoryTextColor,
-                  fontSize: MyDimensions.medium,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            backgroundColor: MyColors.backgroundNotificationColor,
+            appBar:AppBarCustomWidget(
+              showPopupMenu: true,
+              size: size, text: MyStrings.notificationHistory, textStyle:  TextStyle(
+                    color: MyColors.textAppBarColor,
+                    fontSize: MyDimensions.medium,
+                    fontWeight: FontWeight.bold,
+                  ),),
             body: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
                 if (state is LoadingHomeState) {
@@ -298,5 +268,6 @@ class _NotificationHistoryState extends State<NotificationHistory> {
     return DateFormat('HH:mm:ss a').format(date);
   }
 }
+
 
 
